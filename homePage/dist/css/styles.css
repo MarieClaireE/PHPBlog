@@ -234,10 +234,10 @@ sup {
   top: -0.5em;
 }
 
-a {
+/* a {
   color: #0d6efd;
-  text-decoration: underline;
-}
+  text-decoration: none;
+} */
 a:hover {
   color: #0a58ca;
 }
@@ -492,12 +492,39 @@ progress {
   font-weight: 300;
 }
 
+.admin-connexion {
+  color: white;
+  font-size: 10px;
+}
+
+a {
+  text-decoration: none;
+  color:rgba(217, 164, 6);
+}
+a:hover {
+  color:rgba(220, 53, 69, 0.5);
+}
+
 .header-page {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("https://cdn.futura-sciences.com/buildsv6/images/wide1920/5/e/7/5e7e3edfb3_50149494_developpeur-web.jpg");
   width: auto;
   color:rgba(255, 255, 255, 0.85);
 }
+.header-page-users {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("https://thumbs.dreamstime.com/b/d%C3%A9veloppeur-web-sur-l-ordinateur-et-la-projection-virtuelle-dans-un-bureau-moderne-avec-de-grandes-fen%C3%AAtres-une-silhouette-d-166240775.jpg");
+  width: auto;
+  color:rgba(255, 255, 255, 0.5);
+  
+}
+.fond-horloge {
+  background-image:url("https://i.pinimg.com/736x/36/fb/0f/36fb0fb78fff398ddffe9f2ad5adfc72.jpg");
+  color:rgba(255, 255, 255, 1);
+  justify-content: center;
+}
 
+.btn-submit:hover {
+  background-color:rgba(220, 53, 69, 0.5);
+}
 .display-1 {
   font-size: calc(1.625rem + 4.5vw);
   font-weight: 300;
@@ -3125,9 +3152,9 @@ textarea.form-control-lg {
 }
 
 .btn-info {
-  color: #000;
-  background-color: #0dcaf0;
-  border-color: #0dcaf0;
+  color: #B6BABD;
+  background-color: #0E77C6;
+  border-color: #0E77C6;
 }
 .btn-info:hover {
   color: #000;
@@ -7844,6 +7871,11 @@ textarea.form-control-lg {
 .bg-light {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-yellow {
+  --bs-bg-opacity : 1;
+  background-color: var(--bs-yellow) !important;
 }
 
 .bg-dark {
