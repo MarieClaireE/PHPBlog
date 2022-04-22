@@ -5,6 +5,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="../homePage-admin.php">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="">Utilisateurs</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Notifications
@@ -21,10 +22,10 @@
 
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="addPost.php">Ajouter</a></li>
-                        <li><a class="dropdown-item" href="#">Modifier / Supprimer </a></li>
+                        <li><a class="dropdown-item" href="postManagement.php">Modifier / Supprimer </a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#!">Mon Compte</a></li>
+                <li class="nav-item"><a class="nav-link" href="../account/accountmanagement.php">Mon Compte</a></li>
                 <li class="nav-item"><a class="nav-link" href="../deconnexion.php">Déconnexion</a></li>
             </ul>
         </div>

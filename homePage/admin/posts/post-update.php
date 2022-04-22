@@ -67,10 +67,10 @@ $post = $service->readPost($id_url);
                         </h3>
                         <form action="" method="post">
                             <div class="input-group px-2 mt-2">
-                                <input type="text" name="titre" value="<?= $post->getTitre(); ?>" class="form-control">
+                                <input type="text" name="titre" value=<?= $post->getTitre(); ?> class="form-control">
                             </div>
                             <div class="input-group px-2 mt-2">
-                                <input type="text" name="image" value="<?= $post->getImage(); ?>" class="form-control">
+                                <input type="text" name="image" value=<?= $post->getImage(); ?> class="form-control">
                             </div>
                             <div class="input-group px-2 mt-2">
                                 <textarea name="chapo" id="chapo" cols="30" rows="5" class="form-control"><?= $post->getChapo(); ?></textarea>
@@ -78,7 +78,7 @@ $post = $service->readPost($id_url);
                             <div class="input-group px-2 mt-2">
                                 <textarea name="contenu" id="contenu" cols="30" rows="5" class="form-control"><?= $post->getContenu(); ?></textarea>
                             </div>
-                            <input type="hidden" value="<?= date('Y-m-d'); ?>" name="updatedOn">
+                            <input type="hidden" value=<?= date('Y-m-d'); ?> name="updatedOn">
                             <p class="font-weigth-bold px-2 mt-2">
                                 <?php
                                     if ($post->getType() == 0) {
@@ -103,7 +103,7 @@ $post = $service->readPost($id_url);
                                    <option value="4">PHP</option>
                                 </select>
                             </div>
-                            <input type="hidden" value="<?= $id; ?>">
+                            <input type="hidden" value=<?= $id; ?>>
                             <div class="input-group px-2 mt-2">
                                 <input type="submit" placeholder="Modifier" name="update" class="text-center btn btn-info w-100">
                             </div>

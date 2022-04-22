@@ -1,6 +1,6 @@
 <?php
-include('../include/class/Posts.php');
-include('../include/service/PostService.php');
+include'../include/class/Posts.php';
+include'../include/service/PostService.php';
 
 $service = new PostService($cnx);
 $posts = $service->readAllPostClassed();

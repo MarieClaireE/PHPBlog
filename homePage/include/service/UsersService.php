@@ -1,7 +1,7 @@
 <?php
 
-include(__DIR__.' /../include/cnx.php');
-include(__DIR__. '/../trait/ServiceCnx.php');
+include __DIR__.' /../include/cnx.php' ;
+include __DIR__. '/../trait/ServiceCnx.php' ;
 
 use include\class\Users;
 
@@ -59,7 +59,7 @@ class UsersService
 
     public function readUser($id)
     {
-        $sql = "SELECT * FROM user WHERE id = :id ";
+        $sql = "SELECT * FROM users WHERE id = :id ";
         $req = $this->cnx->prepare($sql);
 
         $req->bindValue(':id', $id, PDO::PARAM_INT);
@@ -69,7 +69,7 @@ class UsersService
 
         $user = new Users();
         $user->setId($data['id']);
-        $user->setNom($data['nom']);
+        $user->setNom($data['name']);
         $user->setPrenom($data['prenom']);
         $user->setEmail($data['email']);
         $user->setPassword($data['password']);
@@ -105,10 +105,23 @@ class UsersService
         }
 
     }
-    public function updateUser()
+    public function updateUser(Users $user)
     {
+        $sql = "UPDATE users SET name=:name, prenom=:firstname, email=:email, password=:mdp WHERE id= :id";
 
+        $req = $this->cnx->prepare($sql);
+
+        $req->bindValue(':id', $user->getId(), PDO::PARAM_INT);
+        $req->bindValue(':name', $user->getNom(), PDO::PARAM_STR);
+        $req->bindValue(':firstname', $user->getPrenom(), PDO::PARAM_STR);
+        $req->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
+        $req->bindValue(':mdp', $user->getPassword(), PDO::PARAM_STR);
+
+        $req->execute();
+
+       
     }
+
     public function updatelastCnx($lastCnx, $id) {
         $sql = "UPDATE users SET lastCnx = :lastCnx WHERE id=:id";
         $req = $this->cnx->prepare($sql);

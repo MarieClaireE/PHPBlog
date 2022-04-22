@@ -87,8 +87,8 @@ use \include\class\Posts;
                                    <option value="4">PHP</option>
                                 </select>
                             </div>
-                            <input type="hidden" value="<?= date('Y-m-d'); ?>" name="addedOn">
-                            <input type="hidden" value="<?= $id; ?>" name="usersId">
+                            <input type="hidden" value=<?= date('Y-m-d'); ?> name="addedOn">
+                            <input type="hidden" value=<?= $id; ?> name="usersId">
                             <div class="input-group px-2 mb-2 mt-2">
                                 <input type="submit" class="btn btn-info w-100" name="ajouter" value="Ajouter">
                             </div>

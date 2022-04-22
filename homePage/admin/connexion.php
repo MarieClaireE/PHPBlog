@@ -77,10 +77,10 @@ if (isset($cnx_html)) {
                                         <span class="input-group-text" id="basic-addon2">
                                             <i class="fa-solid fa-key"></i>
                                         </span>
-                                        <input type="password" name="password" placeholder="Votre mot de passe" class="form-control" required >
+                                        <input type="password" name="password" placeholder="Votre mot de passe" class="form-control" aria-describedby="basic-addon2" required >
                                     </div>
                                     <br>
-                                    <input type="hidden" value="<?= date('Y-m-d H:i:s', strtotime('-2H')); ?>" name="lastCnx">
+                                    <input type="hidden" value=<?= date('Y-m-d H:i:s', strtotime('-2H')); ?> name="lastCnx">
                                     <br>
                                     <input type="submit" class="btn btn-info" value="Se connecter" name="connexion">
                                     <a href="" class="float-end">Mot de passe oublié ? </a>

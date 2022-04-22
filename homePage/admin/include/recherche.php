@@ -9,7 +9,7 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Notifications
                     </a>
-
+                    <li class="nav-item"><a class="nav-link" href="">Utilisateurs</a></li>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="#">Action</a></li>
                     </ul>
@@ -24,7 +24,7 @@
                         <li><a class="dropdown-item" href="posts/postManagement.php">Modifier / Supprimer </a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#!">Mon Compte</a></li>
+                <li class="nav-item"><a class="nav-link" href="account/accountmanagement.php">Mon Compte</a></li>
                 <li class="nav-item"><a class="nav-link" href="deconnexion.php">Déconnexion</a></li>
             </ul>
         </div>
