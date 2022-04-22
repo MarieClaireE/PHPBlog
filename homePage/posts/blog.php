@@ -1,5 +1,4 @@
 <?php
-require('../include/include/sessionUser.php');
 require('../include/include/cnx.php');
 ?>
 
@@ -10,7 +9,7 @@ require('../include/include/cnx.php');
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Accueil - PHP Blog</title>
+        <title>Blog - PHP Blog</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../dist/assets/favicon-internet.png" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -26,31 +25,16 @@ require('../include/include/cnx.php');
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="../index.php">Accueil</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="#!">À propos de moi</a></li> -->
+                        <li class="nav-item"><a class="nav-link" href="#!">Me contacter</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Notifications</a></li> <!-- mettre un dropdown pour faire un listing des dernières notifications -->
-                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Mon Compte</a></li>
-                        <li class="nav-item"><a class="nav-link" href="deconnexion.php">Déconnexion</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- Page header with logo and tagline-->
-        <header class="py-5 bg-light border-bottom mb-4 header-page-users">
-            <div class="container">
-                <div class="text-center my-5">
-                    <h1 class="fw-bolder"> <?= ucfirst($prenom); ?> <?= ucfirst($nom); ?></h1>
-                    <p class="lead mb-0">
-                        Bienvenue sur TA partie du Blog, ici tu vas pouvoir faire ce que les autres utilisateurs ne peuvent pas : 
-                        <span class="badge bg-secondary">Commenter</span>. Donc si tu as des remarques ou des questions sur les posts n'hésite pas à utiliser l'espace commentaire.
-                        Et si tu as besoins de plus d'info, n'hésite pas à revenir vers moi dans la partie 
-                        <span class="badge bg-secondary">Contact</span>
-                    </p>
-                </div>
-            </div>
-        </header>
         <!-- Page content-->
-        <div class="container">
+        <div class="container mt-3">
             <div class="row">
                 <!-- Side widget-->
                 <div class="col-lg-4">
@@ -72,7 +56,7 @@ require('../include/include/cnx.php');
                 </div>
                 <!-- Blog entries-->
                 <div class="col-lg-8">
-                    <?php include('posts/list_posts.php');?>
+                    <?php include('list_posts.php');?>
                 </div>
             </div>
         </div>

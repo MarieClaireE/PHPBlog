@@ -21,38 +21,7 @@ require('../include/include/cnx.php');
     </head>
     <body>
         <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">PHP Blog</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Notifications
-                            </a>
-
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                               Gestion des posts
-                            </a>
-
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="posts/addPost.php">Ajouter</a></li>
-                                <li><a class="dropdown-item" href="posts/postManagement.php">Modifier / Supprimer </a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Mon Compte</a></li>
-                        <li class="nav-item"><a class="nav-link" href="deconnexion.php">Déconnexion</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <?php include('include/recherche.php');?>
         <!-- Page header with logo and tagline-->
         <header class="py-5 bg-light border-bottom mb-4 header-page-users">
             <div class="container">
@@ -81,32 +50,11 @@ require('../include/include/cnx.php');
                         </div>
                     </div>
                     <!-- Categories widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Categories</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">Web Design</a></li>
-                                        <li><a href="#!">HTML</a></li>
-                                        <li>
-                                            <a href=""> PHP</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">JavaScript</a></li>
-                                        <li><a href="#!">CSS</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php include('../include/include/categories.php');?>
                 </div>
                 <!-- Blog entries-->
                 <div class="col-lg-8">
-                   <?php include('../posts/list_posts.php');?>
+                   <?php include('posts/list_posts.php');?>
                 </div>
             </div>
         </div>

@@ -2,9 +2,10 @@
 include(__DIR__. ' /../include/cnx.php');
 include(__DIR__. ' /../trait/ServiceCnx.php');
 
+use include\class\Posts;
 
 class PostService {
-
+    
     use ServiceCnx;
 
     public function createPost(Posts $post) {
@@ -31,6 +32,27 @@ class PostService {
 
     public function readPost($id) {
 
+        $sql = 'SELECT * FROM post WHERE id = :id';
+        $req = $this->cnx->prepare($sql);
+
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+
+        $post = new Posts();
+        $post->setId($data['id']);
+        $post->setTitre($data['titre']);
+        $post->setChapo($data['chapo']);
+        $post->setContenu($data['contenu']);
+        $post->setImage($data['image']);
+        $post->setAddedOn($data['addedOn']);
+        $post->setUpdateOn($data['updatedOn']);
+        $post->setUsersId($data['usersId']);
+        $post->setType($data['type']);
+
+        return $post;
+
     }
 
     public function readAllPostClassed() {
@@ -53,7 +75,7 @@ class PostService {
         $req->execute();
 
         while($data = $req->fetch(PDO::FETCH_ASSOC)) {
-            $post = new Posts();
+            $post = new Posts;
             $post->setId($data['id']);
             $post->setTitre($data['titre']);
             $post->setChapo($data['chapo']);
@@ -121,7 +143,16 @@ class PostService {
         
     }
 
-    public function deletePost() {
+    public function deletePost($id) {
+        $sql = "DELETE FROM post WHERE id=:id";
+        $req = $this->cnx->prepare($sql);
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $verif = $req->execute();
 
+        if ($verif) {
+            echo 'Suppression réussie !!!';
+        } else {
+            echo 'Une erreur est survenue, veuillez recommencer !! ';
+        }
     }
 }

@@ -4,6 +4,8 @@ require_once('include/include/cnx.php');
 include('include/service/UsersService.php');
 include('include/class/Users.php');
 
+use include\class\Users;
+
 $message = '';
 // if (isset($_POST['connexion'])) {
 //     if (!empty($_POST['email']) || !empty($_POST['password']))
@@ -86,7 +88,7 @@ if (isset($_POST['connexion'])) {
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Accueil</a></li>
                     <!-- <li class="nav-item"><a class="nav-link" href="#!">À propos de moi</a></li> -->
                     <li class="nav-item"><a class="nav-link" href="#!">Me contacter</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="posts/blog.php">Blog</a></li>
                 </ul>
             </div>
         </div>

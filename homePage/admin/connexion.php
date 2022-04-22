@@ -1,8 +1,8 @@
 <?php
 session_start();
-require('../include/include/cnx.php');
-require('../include/class/Users.php');
-require('../include/service/UsersService.php');
+require'../include/include/cnx.php';
+require'../include/class/Users.php';
+require'../include/service/UsersService.php';
 
 $message = '';
 

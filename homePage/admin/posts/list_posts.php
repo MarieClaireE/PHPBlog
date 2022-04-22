@@ -55,7 +55,7 @@ $nbPage = ceil($tcount[0]["pid"] / $perPage);
                             ?>
                         </span>
                     </p>
-                    <a href="view-post.php?postId=<?= $post->getId();?>" class="btn bg-yellow w-100"> Lire + →</a>
+                    <a href="posts/view-post.php?postId=<?= $post->getId(); ?>" class="btn bg-yellow w-100"> Lire + →</a>
                 </div>
             </div>
         </div>
