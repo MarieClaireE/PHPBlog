@@ -1,5 +1,5 @@
 <?php
-require('include/loadFile.php');
+require'include/loadFile.php';
 use \include\class\Posts;
 
 $post_html = filter_input(INPUT_GET, 'postId', FILTER_VALIDATE_INT);
@@ -11,7 +11,7 @@ $post = $service->readPost($post_html);
 <!DOCTYPE html>
 <html lang="fr">
     <!-- header -->
-    <?php include('include/head.php'); ?>
+    <?php include'include/head.php'; ?>
     <body>
         <!-- nav -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -123,7 +123,7 @@ $post = $service->readPost($post_html);
             </div>
         </div>
         <!-- footer -->
-        <?php include('../../include/include/footer.php');?>
+        <?php include'../../include/include/footer.php';?>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

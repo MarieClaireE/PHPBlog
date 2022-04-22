@@ -1,6 +1,6 @@
 <?php
-require('../include/include/sessionAdmin.php');
-require('../include/include/cnx.php');
+require'../include/include/sessionAdmin.php';
+require'../include/include/cnx.php';
 
 ?>
 
@@ -21,7 +21,7 @@ require('../include/include/cnx.php');
     </head>
     <body>
         <!-- Responsive navbar-->
-        <?php include('include/recherche.php');?>
+        <?php include'include/recherche.php';?>
         <!-- Page header with logo and tagline-->
         <header class="py-5 bg-light border-bottom mb-4 header-page-users">
             <div class="container">
@@ -38,7 +38,7 @@ require('../include/include/cnx.php');
             <div class="row">
                 <!-- Side widget-->
                 <div class="col-lg-4">
-                    <?php include('../include/include/horloge.php');?>
+                    <?php include'../include/include/horloge.php';?>
                     <!-- Search widget-->
                     <div class="card mb-4">
                         <div class="card-header">Search</div>
@@ -50,11 +50,11 @@ require('../include/include/cnx.php');
                         </div>
                     </div>
                     <!-- Categories widget-->
-                    <?php include('../include/include/categories.php');?>
+                    <?php include'../include/include/categories.php';?>
                 </div>
                 <!-- Blog entries-->
                 <div class="col-lg-8">
-                   <?php include('posts/list_posts.php');?>
+                   <?php include'posts/list_posts.php';?>
                 </div>
             </div>
         </div>
