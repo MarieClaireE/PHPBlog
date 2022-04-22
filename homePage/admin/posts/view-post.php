@@ -2,8 +2,10 @@
 require('include/loadFile.php');
 use \include\class\Posts;
 
+$post_html = filter_input(INPUT_GET, 'postId', FILTER_VALIDATE_INT);
+
 $service = new PostService($cnx);
-$post = $service->readPost($_GET['postId']);
+$post = $service->readPost($post_html);
 
 ?>
 <!DOCTYPE html>

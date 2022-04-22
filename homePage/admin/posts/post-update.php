@@ -2,8 +2,9 @@
 require('include/loadFile.php');
 use \include\class\Posts;
 
+$id_url = filter_input(INPUT_GET, 'postId');
 $service = new PostService($cnx);
-$post = $service->readPost($_GET['postId']);
+$post = $service->readPost($id_url);
 
 ?>
 <!DOCTYPE html>
@@ -121,16 +122,18 @@ $post = $service->readPost($_GET['postId']);
 </html>
 
 <?php
-if (isset($_POST['update'])) {
+$update_html = filter_input(INPUT_POST, 'update');
+
+if (isset($update_html)) {
     $post = new Posts;
     
-    $post->setId($_GET['postId']);
-    $post->setTitre($_POST['titre']);
-    $post->setChapo($_POST['chapo']);
-    $post->setImage($_POST['image']);
-    $post->setContenu($_POST['contenu']);
-    $post->setType($_POST['type']);
-    $post->setUpdateOn($_POST['updatedOn']);
+    $post->setId($id_url);
+    $post->setTitre(filter_input(INPUT_POST, 'titre'));
+    $post->setChapo(filter_input(INPUT_POST, 'chapo'));
+    $post->setImage(filter_input(INPUT_POST, 'image'));
+    $post->setContenu(filter_input(INPUT_POST, 'contenu'));
+    $post->setType(filter_input(INPUT_POST, 'type'));
+    $post->setUpdateOn(filter_input(INPUT_POST, 'updatedOn'));
 
     $service->update($post);
 }

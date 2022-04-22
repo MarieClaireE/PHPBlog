@@ -29,21 +29,22 @@ $message = '';
 //         }
 //     }
 // }
+$cnx_html = filter_input(INPUT_POST, 'connexion');
 
-if (isset($_POST['connexion'])) {
+if (isset($cnx_html)) {
     // si le mail et le mdp sont vides
-    if (empty($_POST['email']) || empty($_POST['password'])) {
+    if (empty(filter_input(INPUT_POST, 'email')) || empty(filter_input(INPUT_POST, 'password'))) {
         $message = 'Veuillez remplir tous les champs !! ';
     } else {
         $sql = "SELECT * FROM users WHERE email=:email AND password=:mdp";
         $req = $cnx->prepare($sql);
-        $req->execute(array('email' => $_POST['email'], 'mdp' => $_POST['password']));
+        $req->execute(array('email' =>filter_input(INPUT_POST, 'email'), 'mdp' => filter_input(INPUT_POST, 'password')));
 
         $count = $req->rowCount();
     }
     // si le couple pseudo password est trouvé
     if ($count > 0) {
-        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['email'] = filter_input(INPUT_POST, 'email');
 
         $data = $req->fetch(PDO::FETCH_ASSOC);
         $_SESSION['nom'] = $data['name'];
@@ -200,16 +201,18 @@ if (isset($_POST['connexion'])) {
 </html>
 
 <?php
-if (isset($_POST['inscription'])) {
+$inscription_html = filter_input(INPUT_POST, "inscription", FILTER_DEFAULT);
+
+if (isset($inscription_html)) {
     $user = new Users();
-    $user->setNom($_POST['nom']);
-    $user->setPrenom($_POST['prenom']);
-    $user->setEmail($_POST['email']);
-    $user->setPassword($_POST['password']);
-    $user->setStatut($_POST['statut']);
-    $user->setFirstCnx($_POST['firstCnx']);
+    $user->setNom(filter_input(INPUT_POST, 'nom'));
+    $user->setPrenom(filter_input(INPUT_POST, 'prenom'));
+    $user->setEmail(filter_input(INPUT_POST, 'email'));
+    $user->setPassword(filter_input(INPUT_POST, 'password'));
+    $user->setStatut(filter_input(INPUT_POST, 'statut'));
+    $user->setFirstCnx(filter_input(INPUT_POST, 'firstCnx'));
     
-    if ($_POST['password'] === $_POST['password2']){
+    if (filter_input(INPUT_POST, 'password') === filter_input(INPUT_POST, 'password2')){
         $service = new UsersService($cnx);
         $service->createUser($user);
     } else {

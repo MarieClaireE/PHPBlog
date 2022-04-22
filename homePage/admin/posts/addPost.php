@@ -108,21 +108,24 @@ use \include\class\Posts;
 </html>
 
 <?php
-if (isset($_POST['ajouter'])) {
+$add_html = filter_input(INPUT_POST, 'ajouter');
+$image_html = filter_input(INPUT_POST, 'image');
+
+if (isset($add_html)) {
     $post = new Posts();
 
-    $post->setTitre($_POST['titre']);
-    $post->setChapo($_POST['chapo']);
+    $post->setTitre(filter_input(INPUT_POST, 'titre'));
+    $post->setChapo(filter_input(INPUT_POST, 'chapo'));
 
-    if (empty($_POST['image'])) {
-        $_POST['image'] = 'https://pbs.twimg.com/media/D-lInYQXsAEnXKt.jpg';
+    if (empty($image_html)) {
+        $image_html = 'https://pbs.twimg.com/media/D-lInYQXsAEnXKt.jpg';
     }
-    $post->setImage($_POST['image']);
+    $post->setImage($image_html);
 
-    $post->setContenu($_POST['contenu']);
-    $post->setUsersId($_POST['usersId']);
-    $post->setAddedOn($_POST['addedOn']);
-    $post->setType($_POST['type']);
+    $post->setContenu(filter_input(INPUT_POST, 'contenu'));
+    $post->setUsersId(filter_input(INPUT_POST, 'usersId'));
+    $post->setAddedOn(filter_input(INPUT_POST, 'addedOn'));
+    $post->setType(filter_input(INPUT_POST, 'type'));
 
     $service = new PostService($cnx);
     $service->createPost($post);

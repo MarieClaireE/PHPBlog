@@ -6,16 +6,18 @@ require'../include/service/UsersService.php';
 
 $message = '';
 
-if (isset($_POST['connexion'])) {
+$cnx_html = filter_input(INPUT_POST, 'connexion');
+
+if (isset($cnx_html)) {
     $sql = "SELECT * FROM users WHERE email=:email AND password=:password AND statut=:statut";
     $req = $cnx->prepare($sql);
-    $req->execute(array('email' => $_POST['email'], 'password' => $_POST['password'], 'statut'=> 0));
+    $req->execute(array('email' => filter_input(INPUT_POST, 'email'), 'password' => filter_input(INPUT_POST, 'password'), 'statut'=> 0));
 
     $count = $req->rowCount();
     
     // si le couple pseudo password est trouvé
     if ($count > 0) {
-        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['email'] = filter_input(INPUT_POST, 'email');
 
         $data = $req->fetch(PDO::FETCH_ASSOC);
         $_SESSION['nom'] = $data['name'];
@@ -30,6 +32,7 @@ if (isset($_POST['connexion'])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -39,7 +42,7 @@ if (isset($_POST['connexion'])) {
         <meta name="author" content="" />
         <title>Connexion</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="../dist/assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="../dist/assets/favicon-internet.png" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../dist/css/styles.css" rel="stylesheet" />
         <!-- Font Awesome icons (free version)-->
@@ -107,8 +110,9 @@ if (isset($_POST['connexion'])) {
 </html>
 
 <?php
-if (isset($_POST['connexion'])) {
+
+if (isset($cnx_html)) {
     $service = new UsersService($cnx);
-    $service->updateLastCnx($_POST['lastCnx'], $data['id']);
+    $service->updateLastCnx(filter_input(INPUT_POST, 'lastCnx'), $data['id']);
 }
 
