@@ -3,6 +3,7 @@
 include(__DIR__.' /../include/cnx.php');
 include(__DIR__. '/../trait/ServiceCnx.php');
 
+use include\class\Users;
 
 class UsersService
 {
@@ -112,6 +113,28 @@ class UsersService
 
     public function readAllUsers()
     {
+        $sql = "SELECT * FROM users";
+        $req = $this->cnx->prepare($sql);
+        $req->execute();
+        
+
+        while($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            $user = new Users();
+            $user->setId($data['id']);
+            $user->setNom($data['name']);
+            $user->setPrenom($data['prenom']);
+            $user->setEmail($data['email']);
+            $user->setPassword($data['password']);
+            $user->setFirstCnx($data['firstCnx']);
+            $user->setLastCnx($data['lastCnx']);
+            $user->setStatut($data['statut']);
+
+            $users[] = $user;
+        }
+       
+        if (!empty($users)) {
+            return $users;
+        }
 
     }
     public function updateUser()

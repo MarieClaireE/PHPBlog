@@ -1,4 +1,5 @@
 <?php
+namespace include\class;
 
 class Posts 
 {
