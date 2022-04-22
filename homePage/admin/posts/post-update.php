@@ -1,5 +1,5 @@
 <?php
-require('include/loadFile.php');
+require'include/loadFile.php';
 use \include\class\Posts;
 
 $id_url = filter_input(INPUT_GET, 'postId');
@@ -9,7 +9,7 @@ $post = $service->readPost($id_url);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-    <?php include('include/head.php'); ?>
+    <?php include'include/head.php'; ?>
     <body>
         <!-- navBar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -56,7 +56,7 @@ $post = $service->readPost($id_url);
                         </a>
                     </div>
                     <div class="card mb-4 border-0">                   
-                        <?php include('../../include/include/horloge.php'); ?>                       
+                        <?php include'../../include/include/horloge.php'; ?>                       
                     </div>
                 </div>
                 <!-- contenu -->
@@ -113,7 +113,7 @@ $post = $service->readPost($id_url);
             </div>
         </div>
         <!-- footer -->
-        <?php include('../../include/include/footer.php');?>
+        <?php include'../../include/include/footer.php';?>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

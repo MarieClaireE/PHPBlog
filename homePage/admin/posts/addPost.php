@@ -1,11 +1,11 @@
 <?php
-require('include/loadFile.php');   
+require'include/loadFile.php';   
 use \include\class\Posts; 
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-    <?php include('include/head.php');?>
+    <?php include'include/head.php';?>
     <body>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -54,7 +54,7 @@ use \include\class\Posts;
                  <!-- Side widgets-->
                  <div class="col-lg-4">
                     <!-- horloge widget-->
-                    <?php include('../../include/include/horloge.php') ;?>
+                    <?php include'../../include/include/horloge.php' ;?>
                 </div>
                 <!-- Blog entries-->
                 <div class="col-lg-8">
@@ -99,7 +99,7 @@ use \include\class\Posts;
             </div>
         </div>
         <!-- Footer-->
-            <?php include('../../include/include/footer.php');?>
+            <?php include'../../include/include/footer.php';?>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

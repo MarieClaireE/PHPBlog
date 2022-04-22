@@ -1,8 +1,8 @@
 <?php 
 session_start();
-require_once('include/include/cnx.php');
-include('include/service/UsersService.php');
-include('include/class/Users.php');
+require_once'include/include/cnx.php';
+include'include/service/UsersService.php';
+include'include/class/Users.php';
 
 use include\class\Users;
 
@@ -108,7 +108,7 @@ if (isset($cnx_html)) {
         <div class="row">
             <!-- Side widgets-->
             <div class="col-lg-4">
-                <?php include('include/include/horloge.php'); ?>
+                <?php include'include/include/horloge.php'; ?>
                 <!-- Connexion-->
                 <div class="card mb-4">
                     <div class="card-header">Se connecter</div>
@@ -117,7 +117,9 @@ if (isset($cnx_html)) {
                             <input type="email" placeholder="Votre e-mail" name="email" class="form-control">
                             <br>
                             <input type="password" placeholder="Votre mot de passe" name="password" class="form-control">
+                            <input type="hidden" value="<?= date('Y-m-d H:i:s', strtotime('-2H')); ?>" name="lastCnx">
                             <br>
+
                             <input class="btn btn-info btn-submit" type="submit" value="Se connecter" name="connexion">
                         </form>
                     </div>
@@ -218,4 +220,9 @@ if (isset($inscription_html)) {
     } else {
         $message =  'Les mots de passes sont différents';
     }
+}
+
+if (isset($cnx_html)) {
+    $service = new UsersService($cnx);
+    $service->updateLastCnx(filter_input(INPUT_POST, 'lastCnx'), $data['id']);
 }
