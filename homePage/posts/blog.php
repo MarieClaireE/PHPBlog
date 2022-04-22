@@ -1,5 +1,5 @@
 <?php
-require('../include/include/cnx.php');
+require'../include/include/cnx.php';
 ?>
 
 <!DOCTYPE html>
@@ -52,11 +52,11 @@ require('../include/include/cnx.php');
                         </div>
                     </div>
                     <!-- Categories widget-->
-                    <?php include('../include/include/categories.php');?>
+                    <?php include'../include/include/categories.php';?>
                 </div>
                 <!-- Blog entries-->
                 <div class="col-lg-8">
-                    <?php include('list_posts.php');?>
+                    <?php include'list_posts.php';?>
                 </div>
             </div>
         </div>

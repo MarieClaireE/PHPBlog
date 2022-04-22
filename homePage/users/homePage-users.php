@@ -1,6 +1,6 @@
 <?php
-require('../include/include/sessionUser.php');
-require('../include/include/cnx.php');
+require'../include/include/sessionUser.php';
+require'../include/include/cnx.php';
 ?>
 
 <!DOCTYPE html>
@@ -27,9 +27,9 @@ require('../include/include/cnx.php');
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Notifications</a></li> <!-- mettre un dropdown pour faire un listing des dernières notifications -->
+                        <li class="nav-item"><a class="nav-link" href="#">Notifications</a></li> <!-- mettre un dropdown pour faire un listing des dernières notifications -->
                         <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Mon Compte</a></li>
+                        <li class="nav-item"><a class="nav-link" href="account/account_management.php">Mon Compte</a></li>
                         <li class="nav-item"><a class="nav-link" href="deconnexion.php">Déconnexion</a></li>
                     </ul>
                 </div>
@@ -68,11 +68,11 @@ require('../include/include/cnx.php');
                         </div>
                     </div>
                     <!-- Categories widget-->
-                    <?php include('../include/include/categories.php');?>
+                    <?php include'../include/include/categories.php';?>
                 </div>
                 <!-- Blog entries-->
                 <div class="col-lg-8">
-                    <?php include('posts/list_posts.php');?>
+                    <?php include'posts/list_posts.php';?>
                 </div>
             </div>
         </div>

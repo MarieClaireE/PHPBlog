@@ -117,7 +117,7 @@ if (isset($cnx_html)) {
                             <input type="email" placeholder="Votre e-mail" name="email" class="form-control">
                             <br>
                             <input type="password" placeholder="Votre mot de passe" name="password" class="form-control">
-                            <input type="hidden" value="<?= date('Y-m-d H:i:s', strtotime('-2H')); ?>" name="lastCnx">
+                            <input type="hidden" value=<?= date('Y-m-d H:i:s', strtotime('-2H')); ?> name="lastCnx">
                             <br>
 
                             <input class="btn btn-info btn-submit" type="submit" value="Se connecter" name="connexion">
@@ -140,7 +140,7 @@ if (isset($cnx_html)) {
                             <br>
                             <input type="password" placeholder="Confirmer mot de passe" name="password2" class="form-control" required>
                             <input type="hidden" value="1" name="statut">
-                            <input type="hidden" value="<?= date('Y-m-d'); ?>" name="firstCnx">
+                            <input type="hidden" value=<?= date('Y-m-d'); ?> name="firstCnx">
                             <br>
                             <input class="btn btn-info" type="submit" value="S'inscrire" name="inscription">
                         </form>

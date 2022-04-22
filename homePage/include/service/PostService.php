@@ -1,6 +1,6 @@
 <?php
-include(__DIR__. ' /../include/cnx.php');
-include(__DIR__. ' /../trait/ServiceCnx.php');
+include __DIR__. ' /../include/cnx.php' ;
+include __DIR__. ' /../trait/ServiceCnx.php' ;
 
 use include\class\Posts;
 
