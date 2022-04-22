@@ -57,38 +57,6 @@ class UsersService
         
     }
 
-    public function UserCnx() {
-        $message1 = 'Veuillez remplir tous les champs !! ';
-        $message2 = 'Accès refusé';
-
-        // si le mail et le mdp sont vides
-        if (empty($_POST['email']) || empty($_POST['password'])) {
-            echo $message1;
-        } else {
-            $sql = "SELECT * FROM users WHERE email=:email AND password=:mdp";
-            $req = $this->cnx->prepare($sql);
-            $req->execute(array('email' => $_POST['email'], 'mdp' => $_POST['password']));
-    
-            $count = $req->rowCount();
-        }
-        // si le couple pseudo password est trouvé
-        if ($count > 0) {
-            $_SESSION['email'] = $_POST['email'];
-    
-            $data = $req->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['nom'] = $data['name'];
-            $_SESSION['prenom'] = $data['prenom'];
-            $_SESSION['password'] = $data['password'];
-            $_SESSION['email'] = $data['email'];
-            $_SESSION['id'] = $data['id'];
-    
-            header('location: homePage-users.php?id='.$data['id']);
-        } else {
-            echo $message2;
-        }
-        
-    }
-
     public function readUser($id)
     {
         $sql = "SELECT * FROM user WHERE id = :id ";

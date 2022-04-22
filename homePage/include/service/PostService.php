@@ -61,10 +61,12 @@ class PostService {
         $count->execute();
         $tcount = $count->fetchAll();
 
-        if (!isset($_GET['page'])) {
+        $page_url = filter_input(INPUT_GET, 'page');
+
+        if (!isset($page_url)) {
             $page = 1;
         } else {
-            $page = $_GET['page'];
+            $page = $page_url;
         }
         $perPage = 4;
         $nbPage = ceil($tcount[0]["pid"] / $perPage);

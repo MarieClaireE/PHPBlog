@@ -125,7 +125,9 @@ $nbPage = ceil($tcount[0]["pid"] / $perPage);
 
 <?php
 if (null !== $posts) {
-    if (isset($_POST['delete'])) 
+    $delete_html = filter_input(INPUT_POST, 'delete');
+
+    if (isset($delete_html)) 
     {
         foreach ($posts as $post) {
             $postId = $post->getId();

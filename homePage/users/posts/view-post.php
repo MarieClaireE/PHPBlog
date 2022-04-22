@@ -4,9 +4,10 @@ require'../../include/include/cnx.php';
 include'../../include/class/Posts.php';
 include'../../include/service/PostService.php';
 
+$id_url = filter_input(INPUT_GET, 'postId');
 
 $service = new PostService($cnx);
-$post = $service->readPost($_GET['postId']);
+$post = $service->readPost($id_url);
 // $serviceUsers = new UsersService($cnx);
 // $users = $serviceUsers->readAllUsers();
 
