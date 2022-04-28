@@ -101,7 +101,7 @@ if (isset($update_html)) {
                                 <span class="input-group-text" id="nom"> 
                                     <i class="fa fa-user"></i>
                                 </span>
-                                <input type="text" name="nom" class="form-control" value=<?= $nom; ?> aria-describedby="nom">
+                                <input type="text" name="nom" class="form-control" value="<?= $nom; ?>" aria-describedby="nom">
                             </div>
                             <div class="input-group px-2 mb-2">
                                 <span class="input-group-text" id="prenom">
