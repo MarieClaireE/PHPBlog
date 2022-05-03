@@ -79,32 +79,7 @@ class UsersService
         return $user;
     }
 
-    public function readAllUsers()
-    {
-        $sql = "SELECT * FROM users";
-        $req = $this->cnx->prepare($sql);
-        $req->execute();
-        
-
-        while($data = $req->fetch(PDO::FETCH_ASSOC)) {
-            $user = new Users();
-            $user->setId($data['id']);
-            $user->setNom($data['name']);
-            $user->setPrenom($data['prenom']);
-            $user->setEmail($data['email']);
-            $user->setPassword($data['password']);
-            $user->setFirstCnx($data['firstCnx']);
-            $user->setLastCnx($data['lastCnx']);
-            $user->setStatut($data['statut']);
-
-            $users[] = $user;
-        }
-       
-        if (!empty($users)) {
-            return $users;
-        }
-
-    }
+   
     public function updateUser(Users $user)
     {
         $sql = "UPDATE users SET name=:name, prenom=:firstname, email=:email, password=:mdp WHERE id= :id";

@@ -9,7 +9,6 @@ class ComposerStaticInitb1a867e4df5f3cbab98fddbbd2e0f7cd
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -19,9 +18,12 @@ class ComposerStaticInitb1a867e4df5f3cbab98fddbbd2e0f7cd
         ),
         'S' => 
         array (
-            'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+        ),
+        'A' => 
+        array (
+            'App\\' => 4,
         ),
     );
 
@@ -29,10 +31,6 @@ class ComposerStaticInitb1a867e4df5f3cbab98fddbbd2e0f7cd
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
-        ),
-        'Symfony\\Polyfill\\Php72\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -42,15 +40,9 @@ class ComposerStaticInitb1a867e4df5f3cbab98fddbbd2e0f7cd
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'T' => 
+        'App\\' => 
         array (
-            'Twig_' => 
-            array (
-                0 => __DIR__ . '/..' . '/twig/twig/lib',
-            ),
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
@@ -63,7 +55,6 @@ class ComposerStaticInitb1a867e4df5f3cbab98fddbbd2e0f7cd
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitb1a867e4df5f3cbab98fddbbd2e0f7cd::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitb1a867e4df5f3cbab98fddbbd2e0f7cd::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitb1a867e4df5f3cbab98fddbbd2e0f7cd::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitb1a867e4df5f3cbab98fddbbd2e0f7cd::$classMap;
 
         }, null, ClassLoader::class);

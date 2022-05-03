@@ -7,53 +7,13 @@ include'include/class/Users.php';
 use include\class\Users;
 
 $message = '';
-// if (isset($_POST['connexion'])) {
-//     if (!empty($_POST['email']) || !empty($_POST['password']))
-//     {
-//         $email = $_POST['email'];
-//         $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-//         $verify = password_verify($_POST['password'], $password_hash);
 
-//         $req = $cnx->prepare("SELECT * FROM USERS WHERE email = :email  AND password= :password ");
-//         $req->execute(array(
-//             'email' => $email,
-//             'password' => $password_hash
-//         ));
-
-//         $connecter = $req->fetch();
-//         var_dump($connecter);
-//         if (!$connecter) {
-//             echo 'Le mot de passe ou l\'adresse e-mail est erroné... Veuillez recommencer svp!';
-//         } else {
-//             echo 'C est bon';
-//         }
-//     }
-// }
 $cnx_html = filter_input(INPUT_POST, 'connexion');
 
 if (isset($cnx_html)) {
-    // si le mail et le mdp sont vides
-    if (empty(filter_input(INPUT_POST, 'email')) || empty(filter_input(INPUT_POST, 'password'))) {
-        $message = 'Veuillez remplir tous les champs !! ';
-    } else {
-        $sql = "SELECT * FROM users WHERE email=:email AND password=:mdp";
-        $req = $cnx->prepare($sql);
-        $req->execute(array('email' =>filter_input(INPUT_POST, 'email'), 'mdp' => filter_input(INPUT_POST, 'password')));
-
-        $count = $req->rowCount();
-    }
-    // si le couple pseudo password est trouvé
     if ($count > 0) {
-        $_SESSION['email'] = filter_input(INPUT_POST, 'email');
-
-        $data = $req->fetch(PDO::FETCH_ASSOC);
-        $_SESSION['nom'] = $data['name'];
-        $_SESSION['prenom'] = $data['prenom'];
-        $_SESSION['password'] = $data['password'];
-        $_SESSION['email'] = $data['email'];
-        $_SESSION['id'] = $data['id'];
-
-        header('location: users/homePage-users.php');
+      
+        header('location: users/accueil.twig');
     } else {
         $message = 'Accès refusé';
     }
@@ -218,7 +178,7 @@ if (isset($inscription_html)) {
         $service = new UsersService($cnx);
         $service->createUser($user);
     } else {
-        $message =  'Les mots de passes sont différents';
+        echo 'Les mots de passes sont différents';
     }
 }
 
