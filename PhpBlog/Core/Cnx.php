@@ -29,7 +29,7 @@ class Cnx extends PDO
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         } catch (PDOException $e) {
-            die($e->getMessage());
+            return $e->getMessage();
         }
 
 
