@@ -89,7 +89,6 @@ class CommentaireModel extends Cnx
         }
 
         $perPage = 4;
-        $nbPage = ceil($tcount[0]["cid"] / $perPage);
         $start = ($page-1) * $perPage;
 
         $sql = "SELECT * FROM commentaire ORDER BY addedOn DESC LIMIT $start, $perPage";
