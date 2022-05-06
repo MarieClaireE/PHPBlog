@@ -69,7 +69,7 @@ $nbPage = ceil($tcount[0]["pid"] / $perPage);
                                             <br>
                                             <?php
                                                 if (null !== $post->getUpdateOn()) {
-                                                    echo '<span class="text-muted" style="font-size:small;">
+                                                    print '<span class="text-muted" style="font-size:small;">
                                                     Up :
                                                     </span>' . date('d-m-y', strtotime($post->getUpdateOn()));
                                                 }
@@ -78,8 +78,8 @@ $nbPage = ceil($tcount[0]["pid"] / $perPage);
                                         <td>
                                             <?php
                                             if ($post->getUsersId() === $id) {
-                                                echo $nom. '&nbsp;';
-                                                echo $prenom;
+                                                print $nom. '&nbsp;';
+                                                print $prenom;
                                             }
                                             ?>
                                         </td>
@@ -106,7 +106,7 @@ $nbPage = ceil($tcount[0]["pid"] / $perPage);
                         <div class="col-3 mx-auto">
                             <?php
                             for ($i=1; $i <= $nbPage; $i++) {
-                                echo "<a class='btn page-btn border mb-2 mt-2' href='?page=$i'> $i </a> &nbsp";
+                                print "<a class='btn page-btn border mb-2 mt-2' href='?page=$i'> $i </a> &nbsp";
                             }    
                             ?>
                         </div>

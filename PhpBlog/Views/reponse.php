@@ -25,42 +25,41 @@ if (null !== $reponses ) {
     <?php 
     foreach ($reponses as $reponse)
     {
-        if ($comment->getId() === $reponse->getCommentaireId()) {
-            ?>
-            <div class="card py-2 my-2">
-                <div class="card-header text-muted py-1 px-2">
-                    <?php
-                    foreach ($users as $user) {
-                        if ($user->getId() === $reponse->getUsersId()) {
-                            ?>
-                            <i class="fa fa-user fa-2x"></i>
-                            <?= $user->getName(); ?> <?= $user->getPrenom() ;?>
-                            <?php
-                        }
+        ?>
+        <div class="card py-2 my-2">
+            <div class="card-header text-muted py-1 px-2">
+                <?php
+                foreach ($users as $user) {
+                    if ($user->getId() === $reponse->getUsersId()) {
+                        ?>
+                        <i class="fa fa-user fa-2x"></i>
+                        <?= $user->getName(); ?> <?= $user->getPrenom() ;?>
+                        <?php
                     }
-                    ?>
-                    <span class="float-end">
-                        <i class="fa fa-calendar"></i>
-                        <?= date('d-m-Y', strtotime($reponse->getAddedOn())); ?>
-                    </span>
-                </div>
-                <div class="card-body">
-                    <?= $reponse->getContenu();?>
-                </div>
+                }
+                ?>
+                <span class="float-end">
+                    <i class="fa fa-calendar"></i>
+                    <?= date('d-m-Y', strtotime($reponse->getAddedOn())); ?>
+                </span>
             </div>
-            <?php   
-        }
+            <div class="card-body">
+                <?= $reponse->getContenu();?>
+            </div>
+        </div>
+        <?php   
+        
     }    
     ?>  
 </div>
 <?php
     for ($i=1; $i <= $nbPage; $i++) {
         $commentaireId = $comment->getId();
-        echo "<a class='btn page-btn border mb-2 mt-2 text-center' href='?commentaireId=$commentaireId&page=$i'> $i </a> &nbsp";
+        print "<a class='btn page-btn border mb-2 mt-2 text-center' href='?commentaireId=$commentaireId&page=$i'> $i </a> &nbsp";
         }  
 } else
 {
-    echo '<p class="text-warning">
+    print '<p class="text-warning">
     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
     Aucune réponse pour ce commentaire
     </p>';

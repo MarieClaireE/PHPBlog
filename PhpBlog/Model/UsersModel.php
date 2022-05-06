@@ -11,7 +11,7 @@ class UsersModel extends Cnx
     public function createUser(Users $user)
     { 
         if (empty($user->getName()) || empty($user->getPrenom()) || (empty($user->getEmail()) || (empty($user->getPassword())))) {
-            echo 'Pour s\'enregistrer il faut remplir tous les champs';
+            print 'Pour s\'enregistrer il faut remplir tous les champs';
         } else {
             $sql = "INSERT INTO users (name, prenom, email, password, statut, firstCnx) values (:nom, :prenom, :email, :password, :statut, :firstCnx)";
 
@@ -26,9 +26,9 @@ class UsersModel extends Cnx
 
             $verif = $req->execute();
             if ($verif) {
-                echo "Vous êtes inscrit. Vous pouvez maintenant vous connecter !";
+                print "Vous êtes inscrit. Vous pouvez maintenant vous connecter !";
             } else {
-                echo "Une erreur est survenue ! Veuillez recommencer SVP!";
+                print "Une erreur est survenue ! Veuillez recommencer SVP!";
             }
         }  
     }

@@ -24,9 +24,9 @@ class PostsModel extends Cnx
         $verif = $req->execute();
 
         if ($verif) {
-            echo "Post enregistré !";
+            print "Post enregistré !";
         } else {
-            echo "Une erreur est survenue, veuillez recommencer !";
+            print "Une erreur est survenue, veuillez recommencer !";
         }
     }
    
@@ -132,9 +132,9 @@ class PostsModel extends Cnx
         $verif = $req->execute();
 
         if ($verif) {
-            echo 'Post modifié!';
+            print 'Post modifié!';
         } else {
-            echo 'Une erreur est survenue, veuillez recommencer!';
+            print 'Une erreur est survenue, veuillez recommencer!';
         }
     }
 
@@ -145,9 +145,9 @@ class PostsModel extends Cnx
         $verif = $req->execute();
 
         if ($verif) {
-            echo 'Suppression réussie !!!';
+            print 'Suppression réussie !!!';
         } else {
-            echo 'Une erreur est survenue, veuillez recommencer !! ';
+            print 'Une erreur est survenue, veuillez recommencer !! ';
         }
     }
 }

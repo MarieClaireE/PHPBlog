@@ -82,15 +82,15 @@ $post = $service->readPost($id_url);
                             <p class="font-weigth-bold px-2 mt-2">
                                 <?php
                                     if ($post->getType() == 0) {
-                                        echo "Web Design";
+                                        print "Web Design";
                                     } else if ($post->getType() == 1) {
-                                        echo "HTML";
+                                        print "HTML";
                                     } else if ($post->getType() == 2) {
-                                        echo "JavaScript";
+                                        print "JavaScript";
                                     } else if ($post->getType() == 3) {
-                                        echo "CSS";
+                                        print "CSS";
                                     } else if ($post->getType() == 4) {
-                                        echo "PHP";
+                                        print "PHP";
                                     }
                                 ?>                               
                             </p>

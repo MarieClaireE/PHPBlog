@@ -41,16 +41,16 @@ $nbPage = ceil($tcount[0]["pid"] / $perPage);
                         <span class="badge bg-secondary">
                             <?php
                             if ($post->getType() == 0) {
-                                echo '<span class="badge bg-secondary">
+                                print '<span class="badge bg-secondary">
                                 Web Design </span>';
                             } else if ($post->getType() == 1) {
-                                echo '<span class="badge bg-secondary">HTML</span>';
+                                print '<span class="badge bg-secondary">HTML</span>';
                             } else if ($post->getType() == 2) {
-                                echo '<span class="badge bg-secondary">JavaScript</span>';
+                                print '<span class="badge bg-secondary">JavaScript</span>';
                             } else if ($post->getType() == 3) {
-                                echo '<span class="badge bg-secondary">CSS</span>';
+                                print '<span class="badge bg-secondary">CSS</span>';
                             } else if ($post->getType() == 4) {
-                                echo '<span class="badge bg-secondary">PHP</span>';
+                                print '<span class="badge bg-secondary">PHP</span>';
                             }
                             ?>
                         </span>
@@ -69,7 +69,7 @@ $nbPage = ceil($tcount[0]["pid"] / $perPage);
     <div class="col-3 mx-auto">
         <?php
         for ($i=1; $i <= $nbPage; $i++) {
-            echo "<a class='btn page-btn border mb-2 mt-2' href='?page=$i'> $i </a> &nbsp";
+            print "<a class='btn page-btn border mb-2 mt-2' href='?page=$i'> $i </a> &nbsp";
         }    
         ?>
     </div>

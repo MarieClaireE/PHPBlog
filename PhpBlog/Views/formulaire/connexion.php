@@ -45,7 +45,7 @@ $model = new UsersModel;
                 header('location: users/accueil.php');
             
             } else {
-                echo 'Accès refusé';
+                print 'Accès refusé';
             }
       
         }
