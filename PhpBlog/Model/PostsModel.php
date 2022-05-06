@@ -68,7 +68,6 @@ class PostsModel extends Cnx
             $page = $page_url;
         }
         $perPage = 4;
-        $nbPage = ceil($tcount[0]["pid"] / $perPage);
         $start = ($page-1) * $perPage;
         
         $sql = "SELECT * FROM post ORDER BY addedOn DESC LIMIT $start, $perPage";
