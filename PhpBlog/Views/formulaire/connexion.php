@@ -20,7 +20,7 @@ $model = new UsersModel;
     </form>
     <?php
         $cnx_html = filter_input(INPUT_POST, 'connexion');
-
+        $data = [];
         if (isset($cnx_html)) {
             // si le mail et le mdp sont vides
             if (empty(filter_input(INPUT_POST, 'email')) || empty(filter_input(INPUT_POST, 'password'))) {
@@ -40,12 +40,14 @@ $model = new UsersModel;
                 $_SESSION['email'] = $data['email'];
                 $_SESSION['id'] = $data['id'];
 
+                $model->updateLastCnx(filter_input(INPUT_POST, 'lastCnx'), $data['id']);
+                
                 header('location: users/accueil.php');
+            
             } else {
-                $message = 'Accès refusé';
+                echo 'Accès refusé';
             }
       
-            $model->updateLastCnx(filter_input(INPUT_POST, 'lastCnx'), $data['id']);
         }
     ?>
 </div>

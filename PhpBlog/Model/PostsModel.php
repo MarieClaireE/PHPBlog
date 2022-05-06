@@ -4,7 +4,6 @@ namespace App\Model;
 
 use App\Core\Cnx;
 use PDO;
-use App\Model\Posts;
 
 class PostsModel extends Cnx
 {
@@ -31,7 +30,7 @@ class PostsModel extends Cnx
         }
     }
    
-    public function readPost($id) {
+    public function readPost(int $id) {
 
         $sql = 'SELECT * FROM post WHERE id = :id';
         $req = Cnx::getInstance()->prepare($sql);
@@ -72,7 +71,7 @@ class PostsModel extends Cnx
         $nbPage = ceil($tcount[0]["pid"] / $perPage);
         $start = ($page-1) * $perPage;
         
-        $sql = "SELECT * FROM post ORDER BY id LIMIT $start, $perPage";
+        $sql = "SELECT * FROM post ORDER BY addedOn DESC LIMIT $start, $perPage";
         $req = Cnx::getInstance()->prepare($sql);
         $req->execute();
 
@@ -145,7 +144,7 @@ class PostsModel extends Cnx
         }
     }
 
-    public function deletePost($id) {
+    public function deletePost(int $id) {
         $sql = "DELETE FROM post WHERE id=:id";
         $req = Cnx::getInstance()->prepare($sql);
         $req->bindValue(':id', $id, PDO::PARAM_INT);

@@ -92,6 +92,7 @@ $users = $modelUser->readAllUsers();
                         </div>
                     </div>
                 </div>
+                <hr class="col-10 mx-auto bg-success">
                 <div class="col-12 mb-4">
                     <?php include 'espace_commentaire.php'; ?>
                 </div>
