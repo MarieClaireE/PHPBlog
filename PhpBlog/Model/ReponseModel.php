@@ -31,11 +31,6 @@ class ReponseModel extends Cnx
     /* read all classed */
     public function readAllClassed()
     {
-        $count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM reponse");
-        $count->setFetchMode(PDO::FETCH_ASSOC);
-        $count->execute();
-        $tcount = $count->fetchAll();
-
         $page_url = filter_input(INPUT_GET, 'page');
 
         if (!isset($page_url)) {

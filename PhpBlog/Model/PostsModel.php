@@ -55,11 +55,6 @@ class PostsModel extends Cnx
     }
 
     public function readAllPostClassed() {
-        $count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM post");
-        $count->setFetchMode(PDO::FETCH_ASSOC);
-        $count->execute();
-        $tcount = $count->fetchAll();
-
         $page_url = filter_input(INPUT_GET, 'page');
 
         if (!isset($page_url)) {
