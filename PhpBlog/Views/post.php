@@ -94,6 +94,9 @@ $users = $modelUser->readAllUsers();
                         <div class="card-title h2 text-muted">
                             Espace commentaire
                         </div>
+                        <div class="col-12 mb-4">
+                            <?php include 'espace-commentaire.php'; ?>
+                        </div>
                     </div>
                 </div>
             </div>
