@@ -39,9 +39,9 @@ $mailheaders .= "Reply-To: $email\n\n";
 mail($recipient, $subject, $msg, $mailheaders);
 
 if (isset($_POST['envoyer'])) {
-    echo "<H1 align=center>Merci, $nom </H1>";
-    echo "<P align=center>";
-    echo "Votre formulaire à bien été envoyé !</P>";
+    print "<H1 align=center>Merci, $nom </H1>";
+    print "<P align=center>";
+    print "Votre formulaire à bien été envoyé !</P>";
 }
 
 

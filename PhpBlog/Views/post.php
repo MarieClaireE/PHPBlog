@@ -43,16 +43,16 @@ $users = $modelUser->readAllUsers();
                                 <span class="badge bg-secondary" style="font-size:12px;">
                                      <?php
                                     if ($post->getType() == 0) {
-                                        echo '<span class="badge bg-secondary">
+                                        print '<span class="badge bg-secondary">
                                         Web Design </span>';
                                     } else if ($post->getType() == 1) {
-                                        echo '<span class="badge bg-secondary">HTML</span>';
+                                        print '<span class="badge bg-secondary">HTML</span>';
                                     } else if ($post->getType() == 2) {
-                                        echo '<span class="badge bg-secondary">JavaScript</span>';
+                                        print '<span class="badge bg-secondary">JavaScript</span>';
                                     } else if ($post->getType() == 3) {
-                                        echo '<span class="badge bg-secondary">CSS</span>';
+                                        print '<span class="badge bg-secondary">CSS</span>';
                                     } else if ($post->getType() == 4) {
-                                        echo '<span class="badge bg-secondary">PHP</span>';
+                                        print '<span class="badge bg-secondary">PHP</span>';
                                     }
                                     ?>
                                 </span>
@@ -61,8 +61,8 @@ $users = $modelUser->readAllUsers();
                                     <?php
                                         foreach ($users as $user) {
                                             if ($post->getUsersId() === $user->getId()) {
-                                                echo $user->getName() . '&nbsp;';
-                                                echo $user->getPrenom();
+                                                print $user->getName() . '&nbsp;';
+                                                print $user->getPrenom();
                                             }
                                         }
                                     ?> 
@@ -70,7 +70,7 @@ $users = $modelUser->readAllUsers();
                                     Ajouté le : <?= date('d-m-y', strtotime($post->getAddedOn())); ?><br>
                                     <?php
                                         if (null !== $post->getUpdatedOn()) {
-                                           echo " Modifié le: " . date('d-m-y', strtotime($post->getUpdatedOn()));
+                                           print " Modifié le: " . date('d-m-y', strtotime($post->getUpdatedOn()));
                                         }
                                     ?>
                                 </span>

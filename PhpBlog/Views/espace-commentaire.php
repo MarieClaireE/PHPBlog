@@ -62,7 +62,7 @@ $nbPage = ceil($tcount[0]["cid"] / $perPage);
 
             for ($i=1; $i <= $nbPage; $i++) {
                 $postId = $post->getId();
-                echo "<a class='btn page-btn border mb-2 mt-2' href='?postId=$postId&page=$i'> $i </a> &nbsp";
+                print "<a class='btn page-btn border mb-2 mt-2' href='?postId=$postId&page=$i'> $i </a> &nbsp";
             }    
             ?>
         </div>

@@ -25,7 +25,7 @@ if (isset($repondre_html)) {
 
     $model = new ReponseModel;
     $model->create($reponse);
-    echo 'Réponse envoyée en vérification';
+    print 'Réponse envoyée en vérification';
 }
 ?>
 

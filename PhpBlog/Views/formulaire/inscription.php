@@ -39,7 +39,7 @@ $model = new UsersModel;
             if (filter_input(INPUT_POST, 'password') === filter_input(INPUT_POST, 'password2')){
                 $model->createUser($user);
             } else {
-                echo  'Les mots de passes sont différents';
+                print  'Les mots de passes sont différents';
             }
         }
     ?>

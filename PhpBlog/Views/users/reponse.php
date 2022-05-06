@@ -58,11 +58,11 @@ if (null !== $reponses ) {
 <?php
     for ($i=1; $i <= $nbPage; $i++) {
         $commentaireId = $comment->getId();
-        echo "<a class='btn page-btn border mb-2 mt-2 text-center' href='?commentaireId=$commentaireId&page=$i'> $i </a> &nbsp";
+        print "<a class='btn page-btn border mb-2 mt-2 text-center' href='?commentaireId=$commentaireId&page=$i'> $i </a> &nbsp";
         }  
 } else
 {
-    echo '<p class="text-warning">
+    print '<p class="text-warning">
     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
     Aucune réponse pour ce commentaire
     </p>';

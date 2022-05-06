@@ -178,7 +178,7 @@ if (isset($inscription_html)) {
         $service = new UsersService($cnx);
         $service->createUser($user);
     } else {
-        echo 'Les mots de passes sont différents';
+        print 'Les mots de passes sont différents';
     }
 }
 

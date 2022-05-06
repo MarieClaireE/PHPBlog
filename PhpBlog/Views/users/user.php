@@ -52,7 +52,7 @@ $user = $model->readUser($id);
 
             $model->updateUser($user);
             
-            echo 'Modification effectuée! <br>
+            print 'Modification effectuée! <br>
             <span class="text-small text-muted">
             Si vous ne voyez pas les modifications veuillez vous reconnecter !
             </span> ';
