@@ -1,0 +1,42 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}Accueil - PHP Blog{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-internaute.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="container ">
+        <div class="text-center my-5 ">
+            <h1 class="fw-bolder">Bienvenue sur PHP Blog!</h1>
+            <p class="lead mb-0">Le développement PHP by Marie</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 mt-4">
+            <div class="ms-3">
+            {% include "include/horloge.html" %}
+            </div>
+            {# se connecter #}
+            <div class="card mb-4 ms-3">
+                <div class="card-header">Se connecter</div>
+                {% include 'formulaire/connexion.html' %}
+            </div>
+            {# devenir membre #}
+            <div class="card mb-4 ms-3">
+                <div class="card-header">Devenir membre</div>
+                {# {% include 'internaute/formulaire/connexion.html' %} #}
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4">
+            <div class="row me-3">
+                {% include "include/about-me.html" %}
+            </div>
+        </div>   
+    </div>     
+{% endblock %}

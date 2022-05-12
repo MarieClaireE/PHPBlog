@@ -25,7 +25,8 @@ if (null !== $reponses ) {
     <?php 
     foreach ($reponses as $reponse)
     {
-        if ($comment->getId() === $reponse->getCommentaireId()) {
+        if ($comment->getId() == $reponse->getCommentaireId()) {
+            var_dump($comment->getId(), $reponse->getCommentaireId());
             if ($reponse->getStatut() === 1) {
                 ?>
                 <div class="card py-2 my-2">

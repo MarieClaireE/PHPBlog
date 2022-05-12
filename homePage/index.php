@@ -1,8 +1,8 @@
 <?php 
 session_start();
-require_once'include/include/cnx.php';
-include'include/service/UsersService.php';
-include'include/class/Users.php';
+require_once 'include/include/cnx.php';
+include 'include/service/UsersService.php';
+include 'include/class/Users.php';
 
 use include\class\Users;
 
