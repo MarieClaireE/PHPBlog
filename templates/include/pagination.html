@@ -1,0 +1,41 @@
+<nav class="row" aria-label="Pagination">
+    <hr class="my-0">
+    <div class="col-3 mx-auto">
+        {% if nbpage  > 1 %}
+            {% set nearbyPagesLimit = 4 %}
+            <div>
+                <ul class="pagination">
+                    {% if currentPage != 1 %}
+                        <li>
+                            <a class="btn bg-grey mx-1 border" href="?page=1">First</a> 
+                        </li>
+                    {% endif %}
+                    {% for i in 1..nbpage %}
+                        {% if 0 == (currentPage - nearbyPagesLimit) - loop.index  %}
+                            <li class="disabled">
+                                <a href="#">&nbsp;</a> 
+                            </li>
+                        {% elseif 0 == (currentPage + nearbyPagesLimit) - loop.index  %}
+                            <li class="disabled">
+                                <a href="#">. . .</a> &nbsp;
+                            </li>
+                        {% elseif 0 < (currentPage - nearbyPagesLimit) - loop.index  %}                                      
+                        {% elseif 0 > (currentPage + nearbyPagesLimit) - loop.index  %}
+                        {% else %}
+                            <li 
+                            {% if currentPage == loop.index %} 
+                            active{% endif %}>
+                                <a class="btn border mx-1" href="?page={{ loop.index }}">{{ loop.index }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if currentPage != nbpage %}
+                        <li>
+                            <a class="btn bg-grey mx-1 border" href="?page={{ nbpage }}">Last</a> &nbsp;
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</nav>

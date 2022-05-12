@@ -5,7 +5,7 @@ use App\Model\Commentaire;
 use App\Model\CommentaireModel;
 use App\Model\UsersModel;
 
-$model = new CommentaireModel;
+$model = new CommentaireModel; 
 $comments = $model->readOne(filter_input(INPUT_GET, 'postId'));
 
 $modelUser = new UsersModel;
