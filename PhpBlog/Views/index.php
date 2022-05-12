@@ -1,5 +1,7 @@
 <?php
 session_start();
+include '../AutoloaderTwig.php';
+
 ?>
 <!DOCTYPE html>
 

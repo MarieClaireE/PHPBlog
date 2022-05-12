@@ -1,0 +1,82 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}Accueil - PHP Blog{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-users.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="text-center my-5">
+        <h1 class="fw-bolder"> {{ nom|capitalize }} {{ prenom|capitalize}} </h1>
+        <p class="lead mb-0">
+            Bienvenue sur TA partie du Blog, ici tu vas pouvoir faire ce que les autres utilisateurs ne peuvent pas : 
+            <span class="badge bg-secondary">Commenter</span>. Donc si tu as des remarques ou des questions sur les posts n'hésite pas à utiliser l'espace commentaire.
+            Et si tu as besoins de plus d'info, n'hésite pas à revenir vers moi dans la partie 
+            <span class="badge bg-secondary">Contact</span>
+        </p>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 mt-4">
+            <div class="ms-3 mb-3">
+            {% include "include/horloge.html" %}
+            </div>
+            <div class="ms-3 mb-3 border">
+                {% include "include/search.html" %}
+            </div>
+            <div class="ms-3">
+                {% include "include/categories.html" %}
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4">
+            <div class="row me-3">
+                {% include "users/list-posts.html" %}   
+            </div>
+            <nav class="row" aria-label="Pagination">
+                <hr class="my-0">
+                <div class="col-3 mx-auto">
+                    {% if nbpage  > 1 %}
+                        {% set nearbyPagesLimit = 4 %}
+                        <div>
+                            <ul class="pagination">
+                                {% if currentPage != 1 %}
+                                    <li>
+                                        <a class="btn bg-secondary mx-1 border" href="?page=1">First</a> 
+                                    </li>
+                                {% endif %}
+                                {% for i in 1..nbpage %}
+                                    {% if 0 == (currentPage - nearbyPagesLimit) - loop.index  %}
+                                        <li class="disabled">
+                                            <a href="#">&nbsp;</a> 
+                                        </li>
+                                    {% elseif 0 == (currentPage + nearbyPagesLimit) - loop.index  %}
+                                        <li class="disabled">
+                                            <a href="#">. . .</a> &nbsp;
+                                        </li>
+                                    {% elseif 0 < (currentPage - nearbyPagesLimit) - loop.index  %}                                      
+                                    {% elseif 0 > (currentPage + nearbyPagesLimit) - loop.index  %}
+                                    {% else %}
+                                        <li 
+                                        {% if currentPage == loop.index %} 
+                                        active{% endif %}>
+                                            <a class="btn border mx-1" href="?page={{ loop.index }}">{{ loop.index }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if currentPage != nbpage %}
+                                    <li>
+                                        <a class="btn bg-secondary mx-1 border" href="?page={{ nbpage }}">Last</a> &nbsp;
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>   
+    </div>     
+{% endblock %}
