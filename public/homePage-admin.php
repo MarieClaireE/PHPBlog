@@ -2,6 +2,7 @@
 require 'session.php';
 
 use App\Autoload;
+use App\Model\PostsModel;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -15,6 +16,10 @@ Autoload::register();
 $loader = new FilesystemLoader(ROOT.'/templates');
 $twig = new Environment($loader);
 
+$model = new PostsModel;
+$posts = $model->readAllPostClassed();
+
+$nbPage = 4;
 
 echo $twig->render('admin/homePage.html', [
     'id' => htmlspecialchars($id),
@@ -22,5 +27,7 @@ echo $twig->render('admin/homePage.html', [
     'prenom' => htmlspecialchars($prenom),
     'email' => htmlspecialchars($email),
     'pass' => htmlspecialchars($mdp),
+    'posts' => $posts,
+    'nbpage' => $nbPage
 ]);
 
