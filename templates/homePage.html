@@ -26,11 +26,20 @@
             <div class="card mb-4 ms-3">
                 <div class="card-header">Se connecter</div>
                 {% include 'formulaire/connexion.html' %}
+                <span class="text-center text-danger">
+                    {{ error}}
+                </span>
             </div>
             {# devenir membre #}
             <div class="card mb-4 ms-3">
                 <div class="card-header">Devenir membre</div>
-                {# {% include 'internaute/formulaire/connexion.html' %} #}
+                {% include 'formulaire/inscription.html' %}
+                <span class="text-center text-danger">
+                    {{ error2 }}
+                </span>
+                <span class="text-center text-success">
+                    {{ message }}
+                </span>
             </div>
         </div>
         <div class="col-lg-8 mt-4">

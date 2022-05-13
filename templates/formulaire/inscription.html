@@ -1,0 +1,19 @@
+
+{% set date = date() %}
+<div class="card-body mt-2 text-center">
+    <form action="" method="post">
+        <input type="text" placeholder="Nom" name="name" class="form-control" required>
+        <br>
+        <input type="text" placeholder="Prénom" name="prenom" class="form-control" required>
+        <br>
+        <input type="email" placeholder="email" name="email" class="form-control" required>
+        <br>
+        <input type="password" placeholder="Mot de passe" name="password" class="form-control" required>
+        <br>
+        <input type="password" placeholder="Confirmer mot de passe" name="password2" class="form-control" required>
+        <input type="hidden" value="1" name="statut">
+        <input type="hidden" value="{{ date|date('Y-m-d') }}" name="firstCnx">
+        <br>
+        <input class="btn btn-info" type="submit" value="S'inscrire" name="inscription">
+    </form>
+</div>

@@ -24,12 +24,7 @@ class UsersModel extends Cnx
             $req->bindValue(':firstCnx', $user->getFirstCnx(), PDO::PARAM_STR);
             $req->bindValue(':statut', $user->getStatut(), PDO::PARAM_STR);
 
-            $verif = $req->execute();
-            if ($verif) {
-                print "Vous êtes inscrit. Vous pouvez maintenant vous connecter !";
-            } else {
-                print "Une erreur est survenue ! Veuillez recommencer SVP!";
-            }
+            $req->execute();
         }  
     }
 

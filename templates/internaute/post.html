@@ -102,11 +102,11 @@
                             {% for i in 1..nbpage %}
                                 {% if 0 == (currentPage - nearbyPagesLimit) - loop.index  %}
                                     <li class="disabled">
-                                        <a href="#">&nbsp;</a> 
+                                        <a href="#">...</a> 
                                     </li>
                                 {% elseif 0 == (currentPage + nearbyPagesLimit) - loop.index  %}
                                     <li class="disabled">
-                                        <a href="#">. . .</a> &nbsp;
+                                        <a href="#">...</a>
                                     </li>
                                 {% elseif 0 < (currentPage - nearbyPagesLimit) - loop.index  %}                                      
                                 {% elseif 0 > (currentPage + nearbyPagesLimit) - loop.index  %}

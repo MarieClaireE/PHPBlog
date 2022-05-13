@@ -3,6 +3,9 @@ include 'session.php';
 
 use App\Autoload;
 use App\Model\CommentaireModel;
+use App\Model\Reponse;
+use App\Model\ReponseModel;
+use App\Model\UsersModel;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -20,7 +23,35 @@ $twig->getExtension(\Twig\Extension\CoreExtension::class)->setTimezone('Europe/P
 $commentaireModel = new CommentaireModel;
 $comment = $commentaireModel->readId(filter_input(INPUT_GET, 'id'));
 
+$usersModel = new UsersModel;
+$users = $usersModel->readAllUsers();
+
+$modelReponse = new ReponseModel;
+$reponses = $modelReponse->readAllClassed();
+
+$nbPage = 4;
+
+$message = '';
+$repondre_html = filter_input(INPUT_POST, 'repondre');
+if (isset($repondre_html)) {
+    $reponse= new Reponse;
+    $reponse->setContenu(filter_input(INPUT_POST, 'contenu'));
+    $reponse->setCommentaireId(filter_input(INPUT_POST, 'commentaireId'));
+    $reponse->setUsersId(filter_input(INPUT_POST, 'usersId'));
+    $reponse->setAddedOn(filter_input(INPUT_POST, 'addedOn'));
+    $reponse->setStatut(filter_input(INPUT_POST, 'statut'));
+
+
+    $model = new ReponseModel;
+    $model->create($reponse);
+    $message = 'Réponse envoyée en vérification';
+}
+
 echo $twig->render('users/commentaire.html', [
     'comment' => $comment,
-    'id' => $id
+    'id' => $id,
+    'users' => $users,
+    'reponses' => $reponses,
+    'nbPage' => $nbPage,
+    'message' => $message
 ]);

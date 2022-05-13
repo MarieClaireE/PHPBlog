@@ -2,6 +2,7 @@
 session_start();
 
 use App\Autoload;
+use App\Model\Users;
 use App\Model\UsersModel;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -20,6 +21,7 @@ $twig = new Environment($loader);
 $model = new UsersModel;
 $cnx_html = filter_input(INPUT_POST, 'connexion');
 $data = [];
+$error = '';
 if (isset($cnx_html)) {
     // si le mail et le mdp sont vides
     if (empty(filter_input(INPUT_POST, 'email')) || empty(filter_input(INPUT_POST, 'password'))) {
@@ -44,8 +46,32 @@ if (isset($cnx_html)) {
         header('location: homePageUser.php');
     
     } else {
-        print 'Accès refusé';
+        $error = 'Accès refusé';
     }
 }
 
-echo $twig->render('homePage.html');
+$message = '';
+$error2 = '';
+$inscription_html = filter_input(INPUT_POST, 'inscription');
+if (isset($inscription_html)) {
+    $user = new Users();
+    $user->setName(filter_input(INPUT_POST, 'name'));
+    $user->setPrenom(filter_input(INPUT_POST, 'prenom'));
+    $user->setEmail(filter_input(INPUT_POST, 'email'));
+    $user->setPassword(filter_input(INPUT_POST, 'password'));
+    $user->setStatut(filter_input(INPUT_POST, 'statut'));
+    $user->setFirstCnx(filter_input(INPUT_POST, 'firstCnx'));
+    
+    if (filter_input(INPUT_POST, 'password') === filter_input(INPUT_POST, 'password2')){
+        $model->createUser($user);
+        $message = 'Vous êtes inscrit, connectez vous pour accéder à votre espace personnel';
+    } else {
+        $error2 = 'Les mots de passes sont différents';
+    }
+}
+
+echo $twig->render('homePage.html', [
+    'error' => $error,
+    'error2' => $error2,
+    'message' => $message
+]);
