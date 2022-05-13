@@ -1,0 +1,36 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}Blog - PHP Blog{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-internaute.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="text-center my-5">
+        <h1 class="fw-bolder"> Blog </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 mt-4">
+            <div class="ms-3 mb-3">
+            {% include "include/horloge.html" %}
+            </div>
+            <div class="ms-3 mb-3 border">
+                {% include "include/search.html" %}
+            </div>
+            <div class="ms-3">
+                {% include "include/categories.html" %}
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4">
+            <div class="row me-3">
+                {% include "internaute/blog.html" %}   
+            </div>
+            {% include "include/pagination.html" %}
+        </div>   
+    </div>     
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}Réponse au commentaire {% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-users.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="text-center my-5">
+        <h1 class="fw-bolder"> Réponses au commentaire </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row py-4">
+        <div class="col-lg-4 ms-2">
+            <div class="card border-0 mb-3">
+                <a href="post.php?postId={{ comment.postId }}">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Retour au post
+                </a>
+            </div>
+            <div class="card mb-3 border-0">
+                {% include "include/horloge.html" %}
+            </div>
+        </div>
+        <div class="col-lg-8">
+
+        </div>
+    </div>    
+{% endblock %}
