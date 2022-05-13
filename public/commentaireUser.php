@@ -47,7 +47,7 @@ if (isset($repondre_html)) {
     $message = 'Réponse envoyée en vérification';
 }
 
-return $twig->render('users/commentaire.html', [
+echo $twig->render('users/commentaire.html', [
     'comment' => $comment,
     'id' => htmlspecialchars($id),
     'users' => $users,
