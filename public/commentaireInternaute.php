@@ -32,5 +32,5 @@ echo $twig->render('internaute/commentaire.html', [
     'comment' => $comment,
     'users' => $users,
     'reponses' => $reponses,
-    'nbPage' => $nbPage
+    'nbPage' => htmlspecialchars($nbPage)
 ]);

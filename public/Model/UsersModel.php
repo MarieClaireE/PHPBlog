@@ -86,6 +86,15 @@ class UsersModel extends Cnx
         return $req;
     }
 
+    public function cnxAdmin($email, $pass)
+    {
+        $sql = "SELECT * FROM users WHERE email=:email AND password=:password AND statut=:statut";
+        $req = Cnx::getInstance()->prepare($sql);
+        $req->execute(array('email' => filter_input(INPUT_POST, 'email'), 'password' => filter_input(INPUT_POST, 'password'), 'statut'=> 0));
+
+        return $req;
+    }
+
     public function updateUser(Users $user)
     {
         $sql = "UPDATE users SET name=:name, prenom=:firstname, email=:email, password=:mdp WHERE id= :id";
