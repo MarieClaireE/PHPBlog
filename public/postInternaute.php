@@ -1,5 +1,4 @@
 <?php
-include 'session.php';
 
 use App\Autoload;
 use App\Core\Cnx;
@@ -39,26 +38,9 @@ $tcount = $count->fetchAll();
 $perPage = 4;
 $nbPage = ceil($tcount[0]["pid"] / $perPage);
 
-$message = '';
-$publier_html = filter_input(INPUT_POST, 'publier');
-if(isset($publier_html))
-{
-    $comment = new Commentaire;
-    $comment->setUsersId(filter_input(INPUT_POST, 'usersId'));
-    $comment->setPostId((filter_input(INPUT_POST, 'postId')));
-    $comment->setStatut(filter_input(INPUT_POST, 'statut'));
-    $comment->setContenu(filter_input(INPUT_POST, 'comment'));
-    $comment->setAddedOn(filter_input(INPUT_POST, 'addedOn'));
-
-    $model = new CommentaireModel;
-    $model->create($comment);
-    $message = 'Commentaire est envoyé en vérification';
-}
-echo $twig->render('users/post.html', [
+echo $twig->render('internaute/post.html', [
     'post' => $post,
     'users' => $users,
     'commentaires' => $commentaires,
     'nbpage' => $nbPage,
-    'id' => $id,
-    'message' => $message
 ]);

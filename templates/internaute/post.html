@@ -5,7 +5,7 @@
     {{ parent() }}
 {% endblock %}
 {% block nav %}
-    {% include "include/nav-users.html" %}   
+    {% include "include/nav-internaute.html" %}   
 {% endblock %}
 {% block header %}
     <div class="text-center my-5">
@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-lg-4 py-3">
             <div class="ms-3 mb-3">
-                <a href="homePageUser.php">
+                <a href="listPost.php">
                     <i class="fa-solid fa-arrow-left"></i>
                     Retour à l'accueil
                 </a>
@@ -84,7 +84,7 @@
                 Espace commentaire : 
             </h3>
             <div class="card-body">
-                {% include "users/space-comment.html" %}
+                {% include "internaute/space-comment.html" %}
             </div>
         </div>
         <nav class="row" aria-label="Pagination">
@@ -128,17 +128,5 @@
                 {% endif %}
             </div>
         </nav>
-        <div class="col-10 mx-auto mb-3">
-            {% set date = date() %}
-            <form action="" method="post">
-                <textarea name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>
-                <input type="hidden" name="postId" value="{{ post.id }}">
-                <input type="hidden" name="usersId" value="{{ id }}"  class="form-control">
-                <input type="hidden" name="addedOn" value="{{ date|date('Y-m-d') }}"  class="form-control">
-                <input type="hidden" name="statut" value="1">
-                <input type="submit" name="publier" value="Publier" class="btn bg-yellow w-100 mb-2 mt-2">
-            </form>
-            {{ message }}
-        </div>
     </div>     
 {% endblock %}

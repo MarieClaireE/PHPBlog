@@ -26,12 +26,16 @@ $mailheaders = "From: Mon test de formulaire<> \n";
 $mailheaders .= "Reply-To: $email\n\n";
 
 mail($recipient, $subject, $msg, $mailheaders);
+$message = '';
 
-if (isset($_POST['envoyer'])) {
-    print "<H1 align=center>Merci, $nom </H1>";
-    print "<P align=center>";
-    print "Votre formulaire à bien été envoyé !</P>";
+$envoyer = filter_input(INPUT_POST, 'envoyer');
+if (isset($envoyer)) {
+    $message = "<H1 align=center>Merci, $nom </H1>";
+    $message .= "<P align=center>";
+    $message .= "Votre formulaire à bien été envoyé !</P>";
 }
 
-echo $twig->render('internaute/contact.html');
+echo $twig->render('internaute/contact.html',[
+    'message' => $message
+]);
 

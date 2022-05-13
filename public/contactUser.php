@@ -28,11 +28,15 @@ $mailheaders .= "Reply-To: $email\n\n";
 
 mail($recipient, $subject, $msg, $mailheaders);
 
-if (isset($_POST['envoyer'])) {
-    print "<H1 align=center>Merci, $nom </H1>";
-    print "<P align=center>";
-    print "Votre formulaire à bien été envoyé !</P>";
+$message = '';
+$envoyer = filter_input(INPUT_POST, 'envoyer');
+if (isset($envoyer)) {
+    $message = "<H1 align=center>Merci, $nom </H1>";
+    $message .= "<P align=center>";
+    $message .= "Votre formulaire à bien été envoyé !</P>";
 }
 
-echo $twig->render('users/contact.html');
+echo $twig->render('users/contact.html', [
+    'message' => $message
+]);
 
