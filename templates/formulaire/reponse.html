@@ -1,0 +1,12 @@
+<div class="col-10 mx-auto">
+    {% set date = date() %}
+    <form action="" method="post">
+        <textarea name="contenu" id="contenu" cols="120" rows="10" class="control-form mb-4"></textarea>
+        <input type="hidden" name="usersId" value="{{ id }}">
+        <input type="hidden" name="commentaireId" value="{{ comment.id }}">
+        <input type="hidden" name="addedOn" value="{{ date|date('Y-m-d') }}"  class="form-control">
+        <input type="hidden" name="statut" value=0  class="form-control">
+        <input type="submit" name="repondre" value="Répondre" class="col-12 mb-2 bg-yellow btn ">
+    </form>
+    {{ message }}
+</div>

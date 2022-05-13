@@ -65,7 +65,7 @@ class PostsModel extends Cnx
         $perPage = 4;
         $start = ($page-1) * $perPage;
         
-        $sql = "SELECT * FROM post ORDER BY addedOn DESC LIMIT $start, $perPage";
+        $sql = "SELECT * FROM post ORDER BY addedOn ASC LIMIT $start, $perPage";
         $req = Cnx::getInstance()->prepare($sql);
         $req->execute();
 

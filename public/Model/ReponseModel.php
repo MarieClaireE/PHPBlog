@@ -41,7 +41,7 @@ class ReponseModel extends Cnx
         $perPage = 4;
         $start = ($page-1) * $perPage;
         
-        $sql = "SELECT * FROM reponse ORDER BY addedOn DESC LIMIT $start, $perPage";
+        $sql = "SELECT * FROM reponse ORDER BY addedOn ASC LIMIT $start, $perPage";
         $req = Cnx::getInstance()->prepare($sql);
         $req->execute();
 
