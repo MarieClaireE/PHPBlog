@@ -27,7 +27,6 @@ $message = '';
 $update_html = filter_input(INPUT_POST, 'update');
 
 if (isset($update_html)) {
-    $user = new Users();
     $user->setId($id);
     $user->setName(filter_input(INPUT_POST, 'nom'));
     $user->setPrenom((filter_input(INPUT_POST, 'prenom')));
@@ -36,7 +35,7 @@ if (isset($update_html)) {
 
     $service->updateUser($user);
 
-    $message = "Modification effectuée ! Veuillez vous déconnecter pour effectuer les enregistrements";  
+    header('Location:connexion-admin.php');
 }
 
 echo $twig->render('admin/account.html', [
@@ -45,5 +44,4 @@ echo $twig->render('admin/account.html', [
     'prenom' => htmlspecialchars($prenom),
     'email' => htmlspecialchars($email),
     'pass' => htmlspecialchars($mdp),
-    'message' => $message
 ]);
