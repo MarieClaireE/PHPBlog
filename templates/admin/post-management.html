@@ -1,0 +1,132 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}Ajout d'un post - PHP Blog{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-admin.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="text-center my-5">
+        <h1 class="fw-bolder">Gestion des posts</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 mt-4">
+            <div class="ms-3 mb-3">
+            {% include "include/horloge.html" %}
+            </div>
+            <div class="ms-3 mb-3">
+                {% include "include/search.html" %}
+            </div>
+            <div class="ms-3 mb-3">
+                {% include "include/categories.html" %}
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4 mb-3">
+            <div class="row me-3"> 
+                <div class="card py-2">
+                    <table class="table">
+                        <thead>
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Date</th>
+                            <th>Posté par</th>
+                            <th></th>
+                            {# <th></th> #}
+                        </thead>
+                        <tbody>
+                            {% for post in posts %}
+                                <tr>
+                                    <td>
+                                        <span class="badge bg-secondary">ID: {{ post.id }}</span>
+                                    </td>
+                                    <td>
+                                        {{ post.titre }}
+                                    </td>
+                                    <td>
+                                        <span class="text-muted" style="font-size:small;">
+                                            Add : 
+                                        </span>
+                                        {{ post.addedOn|date('d-m-y') }}  
+                                        <br>
+                                        {% if null != post.updatedOn %}
+                                            <span class="text-muted" style="font-size:small;">
+                                                Up :
+                                            </span>
+                                            {{ post.updatedOn|date('d-m-y') }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% for user in users %}
+                                            {% if user.id == post.usersId %}
+                                                {{ user.name }} {{ user.prenom }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <a href="update-post.php?postId={{ post.id }}" class="btn btn-success">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    </td>
+                                    {# <td>
+                                        <form action="" method="post">
+                                            <input type="submit" name="delete" value="Supprimer" class="btn btn-danger">
+                                        </form>
+                                    </td> #}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                   </table> 
+                   <nav class="row" aria-label="Pagination">
+                        <hr class="my-0">
+                        <div class="col-3 mx-auto">
+                            {% if nbPage  > 1 %}
+                                {% set nearbyPagesLimit = 4 %}
+                                <div>
+                                    <ul class="pagination">
+                                        {% if currentPage != 1 %}
+                                            <li>
+                                                <a class="btn bg-grey mx-1 border" href="?postId={{ post.id }}&page=1">First</a> 
+                                            </li>
+                                        {% endif %}
+                                        {% for i in 1..nbPage %}
+                                            {% if 0 == (currentPage - nearbyPagesLimit) - loop.index  %}
+                                                <li class="disabled">
+                                                    <a href="#">...</a> 
+                                                </li>
+                                            {% elseif 0 == (currentPage + nearbyPagesLimit) - loop.index  %}
+                                                <li class="disabled">
+                                                    <a href="#">...</a>
+                                                </li>
+                                            {% elseif 0 < (currentPage - nearbyPagesLimit) - loop.index  %}                                      
+                                            {% elseif 0 > (currentPage + nearbyPagesLimit) - loop.index  %}
+                                            {% else %}
+                                                <li 
+                                                {% if currentPage == loop.index %} 
+                                                active{% endif %}>
+                                                    <a class="btn border mx-1" href="?postId={{ post.id }}&page={{ loop.index }}">{{ loop.index }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if currentPage != nbPage %}
+                                            <li>
+                                                <a class="btn bg-grey mx-1 border" href="?postId={{ post.id }}&page={{ nbpage }}">Last</a> &nbsp;
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>   
+    </div>     
+{% endblock %}
+
+
+

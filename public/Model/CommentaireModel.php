@@ -107,10 +107,64 @@ class CommentaireModel extends Cnx
         }
     }
 
+     /* read all classed */
+     public function readAllClassedByPost(int $postId)
+     {
+         $page_url = filter_input(INPUT_GET, 'page');
+ 
+         if (!isset($page_url)){
+             $page = 1;
+         } else {
+             $page = $page_url;
+         }
+ 
+         $perPage = 4;
+         $start = ($page-1) * $perPage;
+ 
+         $sql = "SELECT * FROM commentaire WHERE postId =:postId AND statut=0 ORDER BY addedOn DESC LIMIT $start, $perPage";
+         $req = Cnx::getInstance()->prepare($sql);
+         $req->bindValue(':postId', $postId, PDO::PARAM_INT);
+         $req->execute();
+ 
+         while ($data = $req->fetch(PDO::FETCH_ASSOC)){
+             $comment = new Commentaire;
+             $comment->setId($data['id']);
+             $comment->setContenu($data['contenu']);
+             $comment->setUsersId($data['usersId']);
+             $comment->setPostId($data['postId']);
+             $comment->setAddedOn($data['addedOn']);
+             $comment->setStatut($data['statut']);
+ 
+             $comments[] = $comment;
+         }
+ 
+         if (!empty($comments)) {
+             return $comments;
+         }
+     }
+
     /* read all */
     public function readAll()
     {
+        $sql = "SELECT * FROM commentaire";
+        $req = Cnx::getInstance()->prepare($sql);
+        $req->execute();
 
+        while ($data = $req->fetch(PDO::FETCH_ASSOC)){
+            $comment = new Commentaire;
+            $comment->setId($data['id']);
+            $comment->setContenu($data['contenu']);
+            $comment->setUsersId($data['usersId']);
+            $comment->setPostId($data['postId']);
+            $comment->setAddedOn($data['addedOn']);
+            $comment->setStatut($data['statut']);
+
+            $comments[] = $comment;
+        }
+
+        if (!empty($comments)) {
+            return $comments;
+        }
     }
 
     /* update */
@@ -120,8 +174,24 @@ class CommentaireModel extends Cnx
     }
 
     /* delete */
-    public function delete(int $id)
+    // public function delete(Commentaire $comment, Reponse $reponse)
+    // {
+    //     $reponseModel = new ReponseModel;
+    //     $reponseModel->delete($reponse);
+    //     $sql = "DELETE FROM commentaire WHERE postId=:postId AND id=:id";
+    //     $req = Cnx::getInstance()->prepare($sql);
+    //     $req->bindValue(':id', $comment->getId(), PDO::PARAM_INT);
+    //     $req->bindValue(':postId', $comment->getPostId(), PDO::PARAM_INT);
+    //     $req->execute();
+    // }
+    public function delete(Commentaire $comment, Reponse $reponse)
     {
-
+        $reponseModel = new ReponseModel;
+        $reponseModel->delete($reponse);
+        $sql = "DELETE FROM commentaire WHERE postId=:postId AND id=:id";
+        $req = Cnx::getInstance()->prepare($sql);
+        $req->bindValue(':id', $comment->getId(), PDO::PARAM_INT);
+        $req->bindValue(':postId', $comment->getPostId(), PDO::PARAM_INT);
+        $req->execute();
     }
 }

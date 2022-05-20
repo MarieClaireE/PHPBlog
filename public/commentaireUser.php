@@ -2,6 +2,7 @@
 include 'session.php';
 
 use App\Autoload;
+use App\Core\Cnx;
 use App\Model\CommentaireModel;
 use App\Model\Reponse;
 use App\Model\ReponseModel;
@@ -27,9 +28,15 @@ $usersModel = new UsersModel;
 $users = $usersModel->readAllUsers();
 
 $modelReponse = new ReponseModel;
-$reponses = $modelReponse->readAllClassed();
+$reponses = $modelReponse->readAllClassed($comment->getId());
 
-$nbPage = 4;
+$count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM commentaire");
+$count->setFetchMode(PDO::FETCH_ASSOC);
+$count->execute();
+$tcount = $count->fetchAll();
+
+$perPage = 4;
+$nbPage = ceil($tcount[0]["pid"] / $perPage);
 
 $message = '';
 $repondre_html = filter_input(INPUT_POST, 'repondre');

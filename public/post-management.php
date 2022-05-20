@@ -1,8 +1,9 @@
 <?php
+require 'session.php';
+
 use App\Autoload;
 use App\Core\Cnx;
-use App\Model\CommentaireModel;
-use App\Model\ReponseModel;
+use App\Model\PostsModel;
 use App\Model\UsersModel;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -16,18 +17,15 @@ Autoload::register();
 
 $loader = new FilesystemLoader(ROOT.'/templates');
 $twig = new Environment($loader);
-$twig->getExtension(\Twig\Extension\CoreExtension::class)->setTimezone('Europe/Paris');
 
-$commentaireModel = new CommentaireModel;
-$comment = $commentaireModel->readId(filter_input(INPUT_GET, 'id'));
+$postModel = new PostsModel;
+$posts = $postModel->readAllPostClassed();
 
 $usersModel = new UsersModel;
 $users = $usersModel->readAllUsers();
 
-$modelReponse = new ReponseModel;
-$reponses = $modelReponse->readAllClassed($comment->getId());
 
-$count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM commentaire");
+$count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM post");
 $count->setFetchMode(PDO::FETCH_ASSOC);
 $count->execute();
 $tcount = $count->fetchAll();
@@ -35,9 +33,12 @@ $tcount = $count->fetchAll();
 $perPage = 4;
 $nbPage = ceil($tcount[0]["pid"] / $perPage);
 
-echo $twig->render('internaute/commentaire.html', [
-    'comment' => $comment,
+
+
+echo $twig->render('admin/post-management.html', [
+    'id' => $id,
     'users' => $users,
-    'reponses' => $reponses,
-    'nbPage' => htmlspecialchars($nbPage)
+    'posts' => $posts,
+    'nbPage' => $nbPage,
+    // 'message' => $message
 ]);

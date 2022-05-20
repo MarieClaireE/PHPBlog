@@ -2,6 +2,7 @@
 require 'session.php';
 
 use App\Autoload;
+use App\Core\Cnx;
 use App\Model\PostsModel;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -19,7 +20,13 @@ $twig = new Environment($loader);
 $model = new PostsModel;
 $posts = $model->readAllPostClassed();
 
-$nbPage = 4;
+$count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM post");
+$count->setFetchMode(PDO::FETCH_ASSOC);
+$count->execute();
+$tcount = $count->fetchAll();
+
+$perPage = 4;
+$nbPage = ceil($tcount[0]["pid"] / $perPage);
 
 echo $twig->render('admin/homePage.html', [
     'id' => htmlspecialchars($id),

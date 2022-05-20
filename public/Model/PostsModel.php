@@ -21,13 +21,7 @@ class PostsModel extends Cnx
         $req->bindValue(':usersId', $post->getUsersId(), PDO::PARAM_INT);
         $req->bindValue(':type', $post->getType(), PDO::PARAM_INT);
 
-        $verif = $req->execute();
-
-        if ($verif) {
-            print "Post enregistré !";
-        } else {
-            print "Une erreur est survenue, veuillez recommencer !";
-        }
+        $req->execute();
     }
    
     public function readPost(int $id) {
@@ -64,8 +58,7 @@ class PostsModel extends Cnx
         }
         $perPage = 4;
         $start = ($page-1) * $perPage;
-        
-        $sql = "SELECT * FROM post ORDER BY addedOn ASC LIMIT $start, $perPage";
+        $sql = "SELECT * FROM post ORDER BY addedOn DESC LIMIT $start, $perPage";
         $req = Cnx::getInstance()->prepare($sql);
         $req->execute();
 
@@ -129,25 +122,15 @@ class PostsModel extends Cnx
         $req->bindValue(':type', $post->getType(), PDO::PARAM_INT);
         $req->bindValue(':updatedOn', $post->getUpdatedOn(), PDO::PARAM_STR);
 
-        $verif = $req->execute();
-
-        if ($verif) {
-            print 'Post modifié!';
-        } else {
-            print 'Une erreur est survenue, veuillez recommencer!';
-        }
+        $req->execute();
     }
 
-    public function deletePost(int $id) {
+    public function deletePost(Posts $post, Commentaire $commentaire, Reponse $reponse) {
+        $commentaireModel = new CommentaireModel;
+        $commentaireModel->delete($commentaire, $reponse);
         $sql = "DELETE FROM post WHERE id=:id";
         $req = Cnx::getInstance()->prepare($sql);
-        $req->bindValue(':id', $id, PDO::PARAM_INT);
-        $verif = $req->execute();
-
-        if ($verif) {
-            print 'Suppression réussie !!!';
-        } else {
-            print 'Une erreur est survenue, veuillez recommencer !! ';
-        }
+        $req->bindValue(':id', $post->getId(), PDO::PARAM_INT);
+        $req->execute();
     }
 }

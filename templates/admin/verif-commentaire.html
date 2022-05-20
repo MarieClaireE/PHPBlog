@@ -1,0 +1,75 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}Vérification des commentaires - PHP Blog{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-admin.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="text-center my-5">
+        <h1 class="fw-bolder"> Commentaires en attentes de vérifications </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 mt-4">
+            <div class="ms-3 mb-3">
+            {% include "include/horloge.html" %}
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4">
+            <div class="row me-3">
+                <table class="table">
+                        <thead>
+                            <th>Posté par</th>
+                            <th>Post Id</th>
+                            <th>Titre</th>
+                            <th>Contenu</th>
+                            <th>statut</th>
+                            <th></th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                            {# <?php 
+                            foreach ($users as $user) {
+                                if ($user->getId() === $commentaire->getUser()) {
+                                echo $user->getName() ;
+                                echo $user->getFirstname();
+                                }
+                            }
+                            ?> #}
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+        
+                            <td>
+                                
+                            </td>
+                            <td>
+                            <form action="" method="post">
+                                <input type="hidden" value="<?= date('Y-m-d'); ?>" name="addedAt" id="addedAt">
+                                <input type="hidden" value="<?= $commentaire->getId(); ?>" name="commentaireId">
+                                <input type="submit" name="poster" value="Poster" class="btn bg-success">
+                            </form>
+                            </td>
+                            <td>
+                            <form action="" method="get">
+                                <input type="hidden" value="<?= $commentaire->getId(); ?>" name="commentaireId">
+                                <input type="submit" name="reset" value="Supprimer" class="btn bg-danger">
+                                
+                            </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>     
+                  
+            </div>
+        </div>   
+    </div>     
+{% endblock %}

@@ -1,0 +1,36 @@
+{% set date = date('-2H') %}
+
+<form action="" method="post">
+    <div class="input-group mt-2 px-2">
+        <span class="input-group-text font-weight-bold py-2" id="added-1">
+            H1
+        </span>
+        <input type="text" name="titre" placeholder="Titre" aria-describedby="added-1" class="form-control" required>
+    </div>
+    <div class="input-group px-2 mt-2">
+        <textarea name="chapo" id="chapo" cols="30" rows="5" placeholder="Chapô" class="form-control" required></textarea>
+    </div>
+    <div class="input-group mt-2 px-2">
+        <span class="input-group-text" id="added-2">
+            <i class="fa-solid fa-image"></i>
+        </span>
+        <input type="text" name="image" placeholder="Image" aria-describedby="added-2" class="form-control">
+    </div>
+    <div class="input-group px-2 mt-2">
+        <textarea name="contenu" id="contenu" cols="30" rows="10" placeholder="Contenu" class="form-control" required></textarea>
+    </div>
+    <div class="input-group px-2 mt-2">
+        <select name="type" id="type" class="form-control">
+            <option value="0">Web design</option>
+            <option value="1">HTLM</option>
+            <option value="2">JavaScript</option>
+            <option value="3">CSS</option>
+            <option value="4">PHP</option>
+        </select>
+    </div>
+    <input type="hidden" value={{ date|date('Y-m-d')}} name="addedOn">
+    <input type="hidden" value={{ id }} name="usersId">
+    <div class="input-group px-2 mb-2 mt-2">
+        <input type="submit" class="btn btn-info w-100" name="ajouter" value="Ajouter">
+    </div>
+</form>

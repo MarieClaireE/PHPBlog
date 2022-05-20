@@ -39,7 +39,7 @@ if (isset($cnx_html)) {
         $_SESSION['email'] = $data['email'];
         $_SESSION['id'] = $data['id'];
 
-        $service = new UsersModel($cnx);
+        $service = new UsersModel;
         $service->updateLastCnx(filter_input(INPUT_POST, 'lastCnx'), $data['id']);
 
         header('location: homePage-admin.php');
