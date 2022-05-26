@@ -86,7 +86,7 @@ class CommentaireModel extends Cnx
         $perPage = 4;
         $start = ($page-1) * $perPage;
 
-        $sql = "SELECT * FROM commentaire ORDER BY addedOn ASC LIMIT $start, $perPage";
+        $sql = "SELECT * FROM commentaire ORDER BY addedOn DESC LIMIT $start, $perPage";
         $req = Cnx::getInstance()->prepare($sql);
         $req->execute();
 
@@ -168,9 +168,13 @@ class CommentaireModel extends Cnx
     }
 
     /* update */
-    public function update(Commentaire $commentaire)
+    public function update(int $commentaireId)
     {
+        $sql = "UPDATE commentaire SET statut = REPLACE(statut, 1, 0) where id=:id";
 
+        $req = Cnx::getInstance()->prepare($sql);
+        $req->bindValue(':id', $commentaireId, PDO::PARAM_INT);
+        $req->execute();
     }
 
     /* delete */
@@ -184,14 +188,21 @@ class CommentaireModel extends Cnx
     //     $req->bindValue(':postId', $comment->getPostId(), PDO::PARAM_INT);
     //     $req->execute();
     // }
-    public function delete(Commentaire $comment, Reponse $reponse)
+    public function delete(int $commentId, Reponse $reponse)
     {
         $reponseModel = new ReponseModel;
         $reponseModel->delete($reponse);
-        $sql = "DELETE FROM commentaire WHERE postId=:postId AND id=:id";
+        $sql = "DELETE FROM commentaire WHERE id=:id";
         $req = Cnx::getInstance()->prepare($sql);
-        $req->bindValue(':id', $comment->getId(), PDO::PARAM_INT);
-        $req->bindValue(':postId', $comment->getPostId(), PDO::PARAM_INT);
+        $req->bindValue(':id', $commentId, PDO::PARAM_INT);
+        $req->execute();
+    }
+
+    public function deleteComment(int $commentId)
+    {
+        $sql = "DELETE FROM commentaire WHERE id=:id";
+        $req = Cnx::getInstance()->prepare($sql);
+        $req->bindValue(':id', $commentId, PDO::PARAM_INT);
         $req->execute();
     }
 }

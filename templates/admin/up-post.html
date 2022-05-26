@@ -91,7 +91,7 @@
                             {% endif %}
                         {% endfor %}
                         ({{ comment.addedOn|date('d-m-y')}}): {{ comment.contenu }} 
-                        <a href="">Voir les réponses liés</a>
+                        <a href="list-reponses.php?commentId={{ comment.id }}">Voir les réponses liés</a>
                     </li>  
                     {% endif %}
                 {% endfor %}

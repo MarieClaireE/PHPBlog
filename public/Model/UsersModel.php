@@ -10,9 +10,7 @@ class UsersModel extends Cnx
 {
     public function createUser(Users $user)
     { 
-        if (empty($user->getName()) || empty($user->getPrenom()) || (empty($user->getEmail()) || (empty($user->getPassword())))) {
-            print 'Pour s\'enregistrer il faut remplir tous les champs';
-        } else {
+        if (!empty($user->getName()) || !empty($user->getPrenom()) || (!empty($user->getEmail()) || (!empty($user->getPassword())))) {
             $sql = "INSERT INTO users (name, prenom, email, password, statut, firstCnx) values (:nom, :prenom, :email, :password, :statut, :firstCnx)";
 
             $req= Cnx::getInstance()->prepare($sql);
