@@ -1,5 +1,4 @@
 <?php
-include 'session.php';
 
 use App\Autoload;
 use App\Core\Cnx;
@@ -11,6 +10,7 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 define('ROOT', dirname(__DIR__));
+include 'session.php';
 
 require_once ROOT.'/public/Autoload.php';
 require ROOT.'/vendor/autoload.php';
@@ -30,7 +30,7 @@ $users = $usersModel->readAllUsers();
 $modelReponse = new ReponseModel;
 $reponses = $modelReponse->readAllClassed($comment->getId());
 
-$count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM commentaire");
+$count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM reponse");
 $count->setFetchMode(PDO::FETCH_ASSOC);
 $count->execute();
 $tcount = $count->fetchAll();

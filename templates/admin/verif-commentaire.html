@@ -70,7 +70,7 @@
                                     <td>
                                     <form action="" method="post">
                                         <input type="hidden" value="{{ comment.id }}" name="commentaireId">
-                                        <input type="submit" name="reset" value="Supprimer" class="btn bg-danger">   
+                                        <input type="submit" name="reset" value="Supprimer" class="btn bg-danger" onclick="return confirm('Supprimer \’{{ comment.contenu }}\' ?');">   
                                     </form>
                                     </td>
                                 </tr> 

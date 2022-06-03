@@ -1,5 +1,4 @@
 <?php
-require 'session.php';
 
 use App\Autoload;
 use App\Core\Cnx;
@@ -8,6 +7,7 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 define('ROOT', dirname(__DIR__));
+require 'session.php';
 
 require_once ROOT.'/public/Autoload.php';
 require ROOT.'/vendor/autoload.php';
@@ -28,6 +28,15 @@ $tcount = $count->fetchAll();
 $perPage = 4;
 $nbPage = ceil($tcount[0]["pid"] / $perPage);
 
+$html_web_design = filter_input(INPUT_POST, '0');
+$html_html = filter_input(INPUT_POST, '1');
+$html_js = filter_input(INPUT_POST, '2');
+$html_css = filter_input(INPUT_POST, '3');
+$html_php = filter_input(INPUT_POST, '4');
+
+if (isset($html_web_design)) {
+    $model->searchBy(filter_input(INPUT_POST, '0'));
+}
 echo $twig->render('admin/homePage.html', [
     'id' => htmlspecialchars($id),
     'nom' => htmlspecialchars($nom),

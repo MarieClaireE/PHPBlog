@@ -29,6 +29,14 @@
         <div class="col-lg-8 mt-4 mb-3">
             <div class="row me-3"> 
                 <div class="col-12">
+                    <div class="float-end mb-2 me-2">
+                        {% if comments == null %}
+                            <form action="" method="post">
+                                <input type="hidden" value="{{ post.id }}" name="postId">
+                                <input type="submit" name="reset" value="Supprimer" class="btn bg-danger" onclick="return confirm('Supprimer le post \’{{ post.titre }}\' ?');">   
+                            </form>
+                        {% endif %}
+                    </div>
                     <form action="" method="post">
                         <div class="input-group px-2 mt-2">
                             <input type="text" name="titre" value="{{ post.titre }}" class="form-control">

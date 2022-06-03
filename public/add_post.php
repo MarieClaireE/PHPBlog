@@ -1,5 +1,4 @@
 <?php
-require 'session.php';
 
 use App\Autoload;
 use App\Model\Posts;
@@ -8,6 +7,7 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 define('ROOT', dirname(__DIR__));
+require 'session.php';
 
 require_once ROOT.'/public/Autoload.php';
 require ROOT.'/vendor/autoload.php';

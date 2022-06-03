@@ -73,13 +73,13 @@
                                     <td>
                                     <form action="" method="post">
                                         <input type="hidden" value="{{ reponse.id }}" name="reponseId">
-                                        <input type="submit" name="reset" value="Supprimer" class="btn bg-danger">
+                                        <input type="submit" name="reset" value="Supprimer" class="btn bg-danger" onclick="return confirm('Supprimer \’{{ reponse.contenu }}\' ?');">
                                     </form>
                                     </td>
                                 </tr>   
                             {% endfor %}
                         </tbody>
-                </table>     
+                </table>    
                 <nav class="row" aria-label="Pagination">
                     <hr class="my-0">
                     <div class="col-3 mx-auto">

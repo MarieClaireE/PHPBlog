@@ -1,6 +1,8 @@
 <?php
+
 use App\Autoload;
 use App\Core\Cnx;
+use App\Model\CommentaireModel;
 use App\Model\ReponseModel;
 use App\Model\UsersModel;
 use Twig\Environment;
@@ -17,7 +19,14 @@ Autoload::register();
 $loader = new FilesystemLoader(ROOT.'/templates');
 $twig = new Environment($loader);
 
-$count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM commentaire");
+$commentModel = new CommentaireModel;
+$comment = $commentModel->readId(filter_input(INPUT_GET, 'commentId'));
+$reponseModel = new ReponseModel;
+$reponses = $reponseModel->readClassed();
+$userModel = new UsersModel;
+$users = $userModel->readAllUsers();
+
+$count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM reponse");
 $count->setFetchMode(PDO::FETCH_ASSOC);
 $count->execute();
 $tcount = $count->fetchAll();
@@ -25,25 +34,16 @@ $tcount = $count->fetchAll();
 $perPage = 4;
 $nbPage = ceil($tcount[0]["pid"] / $perPage);
 
-$modelReponse = new ReponseModel;
-$reponses = $modelReponse->readClassed();
-
-$model = new UsersModel;
-$users = $model->readAllUsers();
-
 if($reponses !== null) {
     $delete = filter_input(INPUT_POST, 'reset');
     if(isset($delete)) {
-        $modelReponse->deleteReponse(filter_input(INPUT_POST, 'reponseId'));
+        $reponseModel->deleteReponse(filter_input(INPUT_POST, 'reponseId'));
     }
-    $poster = filter_input(INPUT_POST, 'poster');
-    if(isset($poster)) {
-        $modelReponse->update(filter_input(INPUT_POST, 'reponseId'));
-    }       
 }
 
-echo $twig->render('admin/verif-reponse.html', [
+echo $twig->render('admin/list-reponses.html', [
+    'comment' => $comment,
+    'reponses' => $reponses,
     'nbPage' => $nbPage,
-    'reponses' =>$reponses,
     'users' => $users
 ]);

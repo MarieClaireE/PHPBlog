@@ -1,16 +1,18 @@
 <?php
-include 'session.php';
 
 use App\Autoload;
 use App\Core\Cnx;
 use App\Model\PostsModel;
+use App\Model\SessionManager;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 define('ROOT', dirname(__DIR__));
+require 'session.php';
 
 require_once ROOT.'/public/Autoload.php';
 require ROOT.'/vendor/autoload.php';
+
 
 Autoload::register();
 

@@ -1,17 +1,16 @@
 <?php
-
 use App\Autoload;
-use App\Model\Users;
 use App\Model\UsersModel;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-define('ROOT', dirname(__DIR__));
-include 'session.php';
 
+define('ROOT', dirname(__DIR__));
+require 'session.php';
 
 require_once ROOT.'/public/Autoload.php';
 require ROOT.'/vendor/autoload.php';
+
 
 Autoload::register();
 
@@ -36,11 +35,10 @@ if (isset($update_html)) {
 
     header('Location:connexion-admin.php');
 }
-
-echo $twig->render('admin/account.html', [
-    'id' => htmlspecialchars($id),
-    'nom' => htmlspecialchars($nom),
-    'prenom' => htmlspecialchars($prenom),
-    'email' => htmlspecialchars($email),
-    'pass' => htmlspecialchars($mdp),
+echo $twig->render('users/account.html', [
+    'nom' => $nom,
+    'id' => $id,
+    'prenom' => $prenom,
+    'pass' => $mdp,
+    'email' => $email,
 ]);

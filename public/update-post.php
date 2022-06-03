@@ -1,5 +1,4 @@
 <?php
-require 'session.php';
 
 use App\Autoload;
 use App\Core\Cnx;
@@ -13,6 +12,7 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 define('ROOT', dirname(__DIR__));
+require 'session.php';
 
 require_once ROOT.'/vendor/autoload.php';
 require ROOT.'/public/Autoload.php';
@@ -59,6 +59,11 @@ $tcount = $count->fetchAll();
 $perPage = 4;
 $nbPage = ceil($tcount[0]["pid"] / $perPage);
 
+$delete = filter_input(INPUT_POST, 'reset');
+if(isset($delete)) {
+    $postModel->deletePost(filter_input(INPUT_POST, 'postId'));
+    header('Location:post-management.php');
+}
 
 echo $twig->render('admin/up-post.html', [
     'post' => $post,

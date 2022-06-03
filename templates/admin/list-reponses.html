@@ -1,0 +1,80 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}Modifier un post - PHP Blog{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-admin.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="text-center my-5">
+        <h1 class="fw-bolder">Liste des réponses</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 mt-4">
+            <div class="ms-3 mb-3">
+                <a href="update-post.php?postId={{ comment.postId }}">
+                    <i class="fa-solid fa-arrow-left-long"></i>
+                    Retour
+                </a>
+            </div>
+            <div class="ms-3 mb-3">
+            {% include "include/horloge.html" %}
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4 mb-3">
+            <div class="row me-3"> 
+                <div class="col-12">
+                    <table class="table">
+                        <thead>
+                            <th>
+                                Posté par 
+                            </th>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Contenu
+                            </th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            {% for reponse in reponses %}
+                                {% if reponse.commentaireId == comment.id %}
+                                    <tr>
+                                        <td>
+                                            {% for user in users %}
+                                                {% if reponse.usersId == user.id %}
+                                                    {{ user.name|capitalize }} {{ user.prenom|capitalize }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {{ reponse.addedOn|date('d-m-y') }}
+                                        </td>
+                                        <td>
+                                            {{ reponse.contenu }}
+                                        </td>
+                                        <td>
+                                            <form action="" method="post">
+                                                <input type="hidden" value="{{ reponse.id }}" name="reponseId">
+                                                <input type="submit" name="reset" value="Supprimer" class="btn bg-danger" onclick="return confirm('Supprimer \’{{ reponse.contenu }}\' ?');">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>   
+    </div>  
+{% endblock %}
+
+
+

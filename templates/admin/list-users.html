@@ -1,6 +1,6 @@
 {% extends 'BaseTemplate.html.twig' %}
 
-{% block title %}Gestion des posts - PHP Blog{% endblock %}
+{% block title %}Liste utilisateurs - PHP Blog{% endblock %}
 {% block head %}
     {{ parent() }}
 {% endblock %}
@@ -9,7 +9,7 @@
 {% endblock %}
 {% block header %}
     <div class="text-center my-5">
-        <h1 class="fw-bolder">Gestion des posts</h1>
+        <h1 class="fw-bolder">Liste des utilisateurs</h1>
     </div>
 {% endblock %}
 
@@ -19,64 +19,59 @@
             <div class="ms-3 mb-3">
             {% include "include/horloge.html" %}
             </div>
-            <div class="ms-3 mb-3">
-                {% include "include/search.html" %}
-            </div>
-            <div class="ms-3 mb-3">
-                {% include "include/categories.html" %}
-            </div>
         </div>
         <div class="col-lg-8 mt-4 mb-3">
             <div class="row me-3"> 
                 <div class="card py-2">
                     <table class="table">
                         <thead>
-                            <th>Id</th>
-                            <th>Titre</th>
-                            <th>Date</th>
-                            <th>Posté par</th>
-                            <th></th>
-                            {# <th></th> #}
+                           <th>
+                               Nom
+                           </th>
+                           <th>
+                               Prénom
+                           </th>
+                           <th>
+                               Email
+                           </th>
+                           <th>
+                               Rôle
+                           </th>
+                           <th>
+                               Membre depuis le
+                           </th>
+                           <th>
+                               Dernière connexion
+                           </th>
                         </thead>
                         <tbody>
-                            {% for post in posts %}
+                            {% for user in users %}
                                 <tr>
                                     <td>
-                                        <span class="badge bg-secondary">ID: {{ post.id }}</span>
+                                        {{ user.name|capitalize }}
                                     </td>
                                     <td>
-                                        {{ post.titre }}
+                                        {{ user.prenom|capitalize }}
                                     </td>
                                     <td>
-                                        <span class="text-muted" style="font-size:small;">
-                                            Add : 
-                                        </span>
-                                        {{ post.addedOn|date('d-m-y') }}  
-                                        <br>
-                                        {% if null != post.updatedOn %}
-                                            <span class="text-muted" style="font-size:small;">
-                                                Up :
-                                            </span>
-                                            {{ post.updatedOn|date('d-m-y') }}
+                                        {{ user.email }}
+                                    </td>
+                                    <td>
+                                        {% if user.statut == 1 %}
+                                            Utilisateur
+                                        {% else %}
+                                            <i class="fa-solid fa-crown text-warning"></i>
+                                            Administrateur
                                         {% endif %}
                                     </td>
                                     <td>
-                                        {% for user in users %}
-                                            {% if user.id == post.usersId %}
-                                                {{ user.name }} {{ user.prenom }}
-                                            {% endif %}
-                                        {% endfor %}
+                                        {{ user.firstCnx|date('d-m-y') }}
                                     </td>
                                     <td>
-                                        <a href="update-post.php?postId={{ post.id }}" class="btn btn-success">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </a>
+                                        {% if  user.lastCnx is not null %}
+                                            {{ user.lastCnx|date('d-m-y') }}
+                                        {% endif %}
                                     </td>
-                                    {# <td>
-                                        <form action="" method="post">
-                                            <input type="submit" name="delete" value="Supprimer" class="btn btn-danger">
-                                        </form>
-                                    </td> #}
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -90,7 +85,7 @@
                                     <ul class="pagination">
                                         {% if currentPage != 1 %}
                                             <li>
-                                                <a class="btn bg-grey mx-1 border" href="?postId={{ post.id }}&page=1">First</a> 
+                                                <a class="btn bg-grey mx-1 border" href="?page=1">First</a> 
                                             </li>
                                         {% endif %}
                                         {% for i in 1..nbPage %}
@@ -108,13 +103,13 @@
                                                 <li 
                                                 {% if currentPage == loop.index %} 
                                                 active{% endif %}>
-                                                    <a class="btn border mx-1" href="?postId={{ post.id }}&page={{ loop.index }}">{{ loop.index }}</a>
+                                                    <a class="btn border mx-1" href="?page={{ loop.index }}">{{ loop.index }}</a>
                                                 </li>
                                             {% endif %}
                                         {% endfor %}
                                         {% if currentPage != nbPage %}
                                             <li>
-                                                <a class="btn bg-grey mx-1 border" href="?postId={{ post.id }}&page={{ nbpage }}">Last</a> &nbsp;
+                                                <a class="btn bg-grey mx-1 border" href="?page={{ nbpage }}">Last</a> &nbsp;
                                             </li>
                                         {% endif %}
                                     </ul>

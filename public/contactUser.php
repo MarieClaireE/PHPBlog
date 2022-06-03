@@ -1,11 +1,11 @@
 <?php
-include 'session.php';
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 define('ROOT', dirname(__DIR__));
 
+include 'session.php';
 require ROOT.'/vendor/autoload.php';
 
 $loader = new FilesystemLoader(ROOT.'/templates');
@@ -37,6 +37,6 @@ if (isset($envoyer)) {
 }
 
 echo $twig->render('users/contact.html', [
-    'message' => $message
+    'message' => $message,
 ]);
 
