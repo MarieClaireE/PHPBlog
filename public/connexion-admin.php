@@ -1,7 +1,8 @@
 <?php
-session_start();
+// session_start();
 
 use App\Autoload;
+use App\Model\SessionManager;
 use App\Model\UsersModel;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -30,14 +31,16 @@ if (isset($cnx_html)) {
     }
     // si le couple pseudo password est trouvé
     if ($count > 0) {
-        $_SESSION['email'] = filter_input(INPUT_POST, 'email');
+        $session = new SessionManager();
+
+        $session->set('email', filter_input(INPUT_POST, 'email'));
 
         $data = $req->fetch(PDO::FETCH_ASSOC);
-        $_SESSION['nom'] = $data['name'];
-        $_SESSION['prenom'] = $data['prenom'];
-        $_SESSION['password'] = $data['password'];
-        $_SESSION['email'] = $data['email'];
-        $_SESSION['id'] = $data['id'];
+        $session->set('nom', $data['name']);
+        $session->set('prenom', $data['prenom']);
+        $session->set('password', $data['password']);
+        $session->set('email', $data['email']);
+        $session->set('id', $data['id']);
 
         $service = new UsersModel;
         $service->updateLastCnx(filter_input(INPUT_POST, 'lastCnx'), $data['id']);

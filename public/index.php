@@ -39,7 +39,6 @@ if (isset($cnx_html)) {
 
         $data = $req->fetch(PDO::FETCH_ASSOC);
         $session->set('nom', $data['name']);
-        var_dump($session->get('nom'));
         $session->set('prenom', $data['prenom']);
         $session->set('password', $data['password']);
         $session->set('email', $data['email']);
