@@ -55,9 +55,10 @@ class ReponseModel extends Cnx
 
         if (!isset($page_url)) {
             $page = 1;
-        } else {
-            $page = $page_url;
-        }
+            return;
+        } 
+        $page = $page_url;
+
         $perPage = 4;
         $start = ($page-1) * $perPage;
         
@@ -89,9 +90,10 @@ class ReponseModel extends Cnx
 
         if (!isset($page_url)) {
             $page = 1;
-        } else {
-            $page = $page_url;
+            return;
         }
+        $page = $page_url;
+        
         $perPage = 4;
         $start = ($page-1) * $perPage;
         

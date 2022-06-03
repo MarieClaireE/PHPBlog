@@ -4,7 +4,7 @@ namespace App\Model;
 
 class Commentaire 
 {
-    protected $id;
+    protected $commentId;
     protected $usersId;
     protected $postId;
     protected $contenu;
@@ -16,19 +16,19 @@ class Commentaire
 
 
     /**
-     * Get the value of id
+     * Get the value of commentId
      */
     public function getId()
     {
-        return $this->id;
+        return $this->commentId;
     }
 
     /**
      * Set the value of id
      */
-    public function setId($id): self
+    public function setId($commentId): self
     {
-        $this->id = $id;
+        $this->commentId = $commentId;
 
         return $this;
     }

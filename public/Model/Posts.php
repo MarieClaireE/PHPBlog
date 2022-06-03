@@ -4,7 +4,7 @@ namespace App\Model;
 
 class Posts
 {
-    protected $id;
+    protected $postId;
     protected $titre;
     protected $chapo;
     protected $image;
@@ -30,16 +30,16 @@ class Posts
     */
     public function getId()
     {
-        return $this->id;
+        return $this->postId;
     }
 
     /* 
     * set value of if
     * @return self
     */
-    public function setId ($id)
+    public function setId ($postId)
     {
-        $this->id = $id;
+        $this->postId = $postId;
         return $this;
     }
 

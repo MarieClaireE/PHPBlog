@@ -109,7 +109,7 @@ class UsersModel extends Cnx
         }
     }
 
-    public function cnxUser($email, $password)
+    public function cnxUser()
     {   
         $sql = "SELECT * FROM users WHERE email=:email AND password=:mdp";
         $req = Cnx::getInstance()->prepare($sql);
@@ -118,7 +118,7 @@ class UsersModel extends Cnx
         return $req;
     }
 
-    public function cnxAdmin($email, $pass)
+    public function cnxAdmin()
     {
         $sql = "SELECT * FROM users WHERE email=:email AND password=:password AND statut=:statut";
         $req = Cnx::getInstance()->prepare($sql);
@@ -142,10 +142,10 @@ class UsersModel extends Cnx
         $req->execute(); 
     }
 
-    public function updatelastCnx($lastCnx, $id) {
+    public function updatelastCnx($lastCnx, $userId) {
         $sql = "UPDATE users SET lastCnx = :lastCnx WHERE id=:id";
         $req = Cnx::getInstance()->prepare($sql);
-        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->bindValue(':id', $userId, PDO::PARAM_INT);
         $req->bindValue(':lastCnx', $lastCnx, PDO::PARAM_STR);
 
         $req->execute();
