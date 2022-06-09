@@ -13,12 +13,12 @@ $twig = new Environment($loader);
 $message = "";
 $nom = filter_input(INPUT_POST, "nom");
 $email = filter_input(INPUT_POST, "email");
-$suje = filter_input(INPUT_POST, "sujet");
+$sujet = filter_input(INPUT_POST, "sujet");
 $contenu = filter_input(INPUT_POST, "message");
 $envoyer = filter_input(INPUT_POST, 'envoyer');
 /* Page: contact.php */
 //mettez ici votre adresse mail
-$VotreAdresseMail="mcemma@on-phpblog.fr";
+$VotreAdresseMail="mcemma@mon-phpblog.fr";
 // si le bouton "Envoyer" est cliqué
 if(isset($envoyer)) {
     //on vérifie que le champ mail est correctement rempli
