@@ -17,7 +17,7 @@ $loader = new FilesystemLoader(ROOT.'/templates');
 $twig = new Environment($loader);
 
 $model = new PostsModel;
-$posts = $model->readAllPostClassed();
+$posts = $model->readAllPost();
 
 $count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM post");
 $count->setFetchMode(PDO::FETCH_ASSOC);

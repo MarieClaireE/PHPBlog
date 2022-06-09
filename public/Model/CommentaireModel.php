@@ -79,9 +79,9 @@ class CommentaireModel extends Cnx
 
         if (!isset($page_url)){
             $page = 1;
-            return;
-        } 
-        $page = $page_url;
+        } else {
+            $page = $page_url;
+        }
         
 
         $perPage = 4;
@@ -115,9 +115,9 @@ class CommentaireModel extends Cnx
 
         if (!isset($page_url)){
             $page = 1;
-            return;
-        } 
-        $page = $page_url;
+        } else {
+            $page = $page_url;
+        }
          
         $perPage = 4;
         $start = ($page-1) * $perPage;

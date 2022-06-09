@@ -73,6 +73,7 @@ if (isset($inscription_html)) {
     }
 }
 
+
 echo $twig->render('homePage.html', [
     'error' => $error,
     'error2' => $error2,

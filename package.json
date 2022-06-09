@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "push.js": "^1.0.12",
     "startbootstrap-blog-home": "^5.0.8"
   }
 }
