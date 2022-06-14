@@ -3,6 +3,8 @@
 
 use App\Model\SessionManager;
 use App\Autoload;
+use App\Core\Cnx;
+use App\Model\Security;
 use App\Model\Users;
 use App\Model\UsersModel;
 use Twig\Environment;
@@ -24,12 +26,16 @@ $model = new UsersModel;
 $cnx_html = filter_input(INPUT_POST, 'connexion');
 $data = [];
 $error = '';
+$pass = filter_input(INPUT_POST, 'password');
+$pass_hash = Security::hasher($pass);
+
 if (isset($cnx_html)) {
     // si le mail et le mdp sont vides
-    if (empty(filter_input(INPUT_POST, 'email')) || empty(filter_input(INPUT_POST, 'password'))) {
+    if (empty(filter_input(INPUT_POST, 'email')) || empty($pass)) {
         $message = 'Veuillez remplir tous les champs !! ';
     } else {
-        $req = $model->cnxUser(filter_input(INPUT_POST, 'email'), filter_input(INPUT_POST, 'password'));
+        $req = $model->cnxUser();
+        $data = $req->fetch(PDO::FETCH_ASSOC);
         $count = $req->rowCount();
     }
     // si le couple pseudo password est trouvé
@@ -37,16 +43,17 @@ if (isset($cnx_html)) {
         $session = new SessionManager();
         $session->set('email', filter_input(INPUT_POST, 'email'));
 
-        $data = $req->fetch(PDO::FETCH_ASSOC);
         $session->set('nom', $data['name']);
         $session->set('prenom', $data['prenom']);
         $session->set('password', $data['password']);
         $session->set('email', $data['email']);
         $session->set('id', $data['id']);
 
-        $model->updateLastCnx(filter_input(INPUT_POST, 'lastCnx'), $data['id']);
-        
-        header('location: homePageUser.php');
+        if ($pass_hash == $data['password']) {
+            $model->updateLastCnx(filter_input(INPUT_POST, 'lastCnx'), $data['id']);
+            
+            header('location: homePageUser.php');
+        }
     
     } else {
         $error = 'Accès refusé';
@@ -56,12 +63,16 @@ if (isset($cnx_html)) {
 $message = '';
 $error2 = '';
 $inscription_html = filter_input(INPUT_POST, 'inscription');
+$pass = filter_input(INPUT_POST, "password");
+
+$pass_hash = Security::hasher($pass);
+
 if (isset($inscription_html)) {
     $user = new Users();
     $user->setName(filter_input(INPUT_POST, 'name'));
     $user->setPrenom(filter_input(INPUT_POST, 'prenom'));
     $user->setEmail(filter_input(INPUT_POST, 'email'));
-    $user->setPassword(filter_input(INPUT_POST, 'password'));
+    $user->setPassword($pass_hash);
     $user->setStatut(filter_input(INPUT_POST, 'statut'));
     $user->setFirstCnx(filter_input(INPUT_POST, 'firstCnx'));
     
