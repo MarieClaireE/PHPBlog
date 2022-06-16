@@ -1,0 +1,46 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}Réinitialiser le mot de passe{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-internaute.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="container ">
+        <div class="text-center my-5 ">
+            <p class="lead mb-0">Réinitialiser le mot de passe</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 mt-4">
+            <div class="ms-3 mb-3">
+                <a href="homePageUser.php">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Retour à l'accueil
+                </a>
+            </div>
+            <div class="ms-3">
+            {% include "include/horloge.html" %}
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4 mb-2">
+            <div class="card ms-2 me-3 bg-light border-0">
+                Entrez votre email : 
+                <form class="form-reset" action="" method="post">
+                    <input type="email" id="resetEmail" name="reset-Email" class="form-control" placeholder="Adresse email">
+                    <div class="d-grid gap-2 mt-1">
+                        <button class="btn bg-yellow " name="btn_user_reset" type="submit">Réinitialiser le mot de passe</button>
+                    </div>
+                </form>
+                {{ comm }}
+            </div>
+        </div>   
+    </div>   
+    
+
+{% endblock %}
