@@ -13,7 +13,6 @@ require 'session.php';
 require_once ROOT.'/public/Autoload.php';
 require ROOT.'/vendor/autoload.php';
 
-
 Autoload::register();
 
 $loader = new FilesystemLoader(ROOT.'/templates');

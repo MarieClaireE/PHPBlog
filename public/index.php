@@ -15,7 +15,6 @@ define('ROOT', dirname(__DIR__));
 require_once ROOT.'/public/Autoload.php';
 require ROOT.'/vendor/autoload.php';
 
-
 Autoload::register();
 
 $loader = new FilesystemLoader(ROOT.'/templates');
@@ -83,7 +82,6 @@ if (isset($inscription_html)) {
         $error2 = 'Les mots de passes sont différents';
     }
 }
-
 
 echo $twig->render('homePage.html', [
     'error' => $error,

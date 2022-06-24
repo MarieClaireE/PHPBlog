@@ -150,5 +150,4 @@ class UsersModel extends Cnx
 
         $req->execute();
     }
-
 }
