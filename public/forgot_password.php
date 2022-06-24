@@ -24,7 +24,6 @@ $email = filter_input(INPUT_POST, 'reset-Email');
 if (isset($btn)) {
     // si le formulaire est correctement remplit
     if(!empty($email)) {
-        var_dump($email);
         // on fait une requête pour savoir si l'adresse est associé à un compte
         $sql = Cnx::getInstance()->prepare('SELECT COUNT(*) AS nb FROM users WHERE email= ?');
         $sql->bindValue(1, filter_input(INPUT_POST, 'reset-Email'));
@@ -45,7 +44,7 @@ if (isset($btn)) {
             $sql->execute();
 
             // on prépare l'envoie du courriel
-            $link = 'up_password.php?token'.$token;
+            $link = 'https://mon-phpblog.fr/up_password.php?token='.$token;
             $to = $email;
             $subject = 'Réinitialisation de votre mot de passe';
             $message = '<h1>Réinitialisation de votre mot de passe</h1><p>Pour réinitialiser votre mot de passe, veuillez suivre ce lien: <a href="'.$link.'">Modifier le mot de passe</a></p>';
@@ -53,12 +52,15 @@ if (isset($btn)) {
             // on défini les entêtes requis
           	$Entetes = "MIME-Version: 1.0\r\n";
            	$Entetes .= "Content-type: text/html; charset=UTF-8\r\n";
-          	$Entetes .= 'To: ' .$to.' <'.$to.'>';//de préférence une adresse avec le même domaine de là où, vous utilisez ce code, cela permet un envoie quasi certain jusqu'au destinataire
-          	$Entetes .= 'Mon PHPBlog: < webmaster@mon-phpblog.fr>\r\n';
+            $Entetes .= "From: Mon PHPBlog < mcemma@mon-phpblog.fr >\r\n";
+          	$Entetes .= 'Reply-To: Mon PHPBlog < mcemma@mon-phpblog.fr >';//de préférence une adresse avec le même domaine de là où, vous utilisez ce code, cela permet un envoie quasi certain jusqu'au destinataire
 
 
             // on envoie le courriel 
-            mail($to, $subject, $message, $Entetes);
+
+            $Sujet = $subject;
+            $Message=$message;
+            mail($to, $Sujet, nl2br($Message), $Entetes);
             $comm = 'Un courriel a été acheminé. Veuillez regarder votre boîte mail et suivre les instructions à l\'intérieur du courriel (pensez à verifier vos spams).';
         } else {
             // si elle n'est pas associée à un compte
