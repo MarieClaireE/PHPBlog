@@ -27,9 +27,12 @@ $tcount = $count->fetchAll();
 $perPage = 4;
 $nbPage = ceil($tcount[0]["pid"] / $perPage);
 
+$filterType = filter_input(INPUT_POST, 'filterType');
 
+$filter = $model->filterPost($filterType);
 
 echo $twig->render('internaute/list-posts.html', [
     'nbpage' => $nbPage,
-    'posts' => $posts
+    'posts' => $posts,
+    'filter' => $filter
 ]);

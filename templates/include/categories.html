@@ -1,36 +1,45 @@
 <div class="card mb-4">
-    <div class="card-header">Categories</div>
+    <div class="card-header">Catégories</div>
     <div class="card-body">
         <div class="row">
-            <div class="col-sm-6">
-                <ul class="list-unstyled mb-0">
+
+            <div class="col-sm-12">
+                <select name="" id="filter-post" class="form-control">
+                    <option value="">Tous</option>
+                    <option value="0" name="filterType">Web Design</option>
+                    <option value="1" name="filterType">HTML</option>
+                    <option value="2" name="filterType">Javascript</option>
+                    <option value="3" name="filterType">CSS</option>
+                    <option value="4" name="filterType">PHP</option>
+                </select>
+                {# <ul class="list-unstyled mb-0">
                     <form action="" method="post">
                         <ul>
                             <li style="list-style-type:none;">
-                                <input type="submit" value="Web Design" name="0" class="btn btn-outline text-warning">
+                                <input type="submit" value="Web Design" id="0" name="filterType" class="filter-class btn btn-outline text-warning">
                             </li>
                             <li style="list-style-type:none;">
-                                <input type="submit" value="HTML" name="1" class="btn btn-outline text-warning">
+                                <input type="submit" value="HTML" id="1" name="filterType" class="filter-class btn btn-outline text-warning">
                             </li>
                             <li style="list-style-type:none;">
-                                <input type="submit" value="PHP" name="4" class="btn btn-outline text-warning">
+                                <input type="submit" value="PHP" id="4"  name="filterType" class="filter-class btn btn-outline text-warning">
                             </li>
                         </ul>
                     </form>
-                </ul>
+                </ul> #}
             </div>
-            <div class="col-sm-6">
+            {# <div class="col-sm-6">
                 <form action="" method="post">
                     <ul>
                         <li style="list-style-type:none;">
-                            <input type="submit" value="JavaScript" name="2" class="btn btn-outline text-warning">
+                            <input type="submit" value="JavaScript" id="2" name="filterType" class="filter-class btn btn-outline text-warning">
                         </li>
                         <li style="list-style-type:none;">
-                            <input type="submit" value="CSS" name="3" class="btn btn-outline text-warning">
+                            <input type="submit" value="CSS" id="3" name="filterType" class="filter-class btn btn-outline text-warning">
                         </li>
                     </ul>
                 </form>
-            </div>
+            </div> #}
         </div>
     </div>
 </div>

@@ -111,6 +111,32 @@ class PostsModel extends Cnx
         
     }
 
+    public function filterPost($filter) {
+        $sql = "SELECT * FROM post WHERE type=:type";
+        $req = Cnx::getInstance()->prepare($sql);
+
+        $req->bindValue(':type', $filter, PDO::PARAM_INT);
+
+        while($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            $post = new Posts();
+            $post->setId($data['id']);
+            $post->setTitre($data['titre']);
+            $post->setChapo($data['chapo']);
+            $post->setImage($data['image']);
+            $post->setContenu($data['contenu']);
+            $post->setAddedOn($data['addedOn']);
+            $post->setUpdatedOn($data['updatedOn']);
+            $post->setUsersId($data['usersId']);
+            $post->setType($data['type']);
+
+            $posts[] = $post;
+        }
+
+        if (!empty($posts)) {
+            return $posts;
+        }
+
+    }
     public function update(Posts $post) {
         $sql = "UPDATE post SET titre=:titre, chapo=:chapo, image=:image, contenu=:contenu, type=:type, updatedOn=:updatedOn where id=:id";
         $req = Cnx::getInstance()->prepare($sql);

@@ -1,6 +1,6 @@
 {% for post in posts %}
     <div class="col-lg-6">
-        <div class="card mb-4">
+        <div class="card mb-4 items card-post hide" data-type="{{ post.type }}">
             <a href="#!">
                 <img class="card-img-top" src="{{ post.image }}" alt="">
             </a>
