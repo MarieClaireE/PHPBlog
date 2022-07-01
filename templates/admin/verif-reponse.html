@@ -1,0 +1,127 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}Vérification des réponses - PHP Blog{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-admin.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="text-center my-5">
+        <h1 class="fw-bolder"> Réponses en attentes de vérifications </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 mt-4">
+            <div class="ms-3 mb-3">
+            {% include "include/horloge.html" %}
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4">
+            <div class="row me-3">
+                <table class="table">
+                        <thead>
+                            <th>Posté par</th>
+                            <th>Commentaire Id</th>
+                            <th>Contenu</th>
+                            <th>Statut</th>
+                            <th>Posté le</th>
+                            <th></th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            {% for reponse in reponses %}
+                                <tr>
+                                    <td>
+                                        {% for user in users %}
+                                            {% if user.id == reponse.usersId %}
+                                                {{ user.name }} {{ user.prenom }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        {{ reponse.commentaireId }}
+                                    </td>
+                                    <td>
+                                        {{ reponse.contenu }}
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-yellow">
+                                            {% if reponse.statut == 0 %}
+                                                En attente
+                                            {% endif %}
+                                            {% if reponse.statut == 1 %}
+                                                Posté
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{ reponse.addedOn|date('d-m-y') }}
+                                    </td>
+                                    <td>
+                                    {% if reponse.statut == 0 %}
+                                        <form action="" method="post">
+                                            <input type="hidden" value="{{ reponse.id }}" name="reponseId">
+                                            <input type="submit" name="poster" value="Poster" class="btn bg-success">
+                                        </form>
+                                    {% endif %}
+                                    
+                                    </td>
+                                    <td>
+                                    <form action="" method="post">
+                                        <input type="hidden" value="{{ reponse.id }}" name="reponseId">
+                                        <input type="submit" name="reset" value="Supprimer" class="btn bg-danger" onclick="return confirm('Supprimer \’{{ reponse.contenu }}\' ?');">
+                                    </form>
+                                    </td>
+                                </tr>   
+                            {% endfor %}
+                        </tbody>
+                </table>    
+                <nav class="row" aria-label="Pagination">
+                    <hr class="my-0">
+                    <div class="col-3 mx-auto">
+                        {% if nbPage  > 1 %}
+                            {% set nearbyPagesLimit = 4 %}
+                            <div>
+                                <ul class="pagination">
+                                    {% if currentPage != 1 %}
+                                        <li>
+                                            <a class="btn bg-grey mx-1 border" href="?page=1">First</a> 
+                                        </li>
+                                    {% endif %}
+                                    {% for i in 1..nbPage %}
+                                        {% if 0 == (currentPage - nearbyPagesLimit) - loop.index  %}
+                                            <li class="disabled">
+                                                <a href="#">...</a> 
+                                            </li>
+                                        {% elseif 0 == (currentPage + nearbyPagesLimit) - loop.index  %}
+                                            <li class="disabled">
+                                                <a href="#">...</a>
+                                            </li>
+                                        {% elseif 0 < (currentPage - nearbyPagesLimit) - loop.index  %}                                      
+                                        {% elseif 0 > (currentPage + nearbyPagesLimit) - loop.index  %}
+                                        {% else %}
+                                            <li 
+                                            {% if currentPage == loop.index %} 
+                                            active{% endif %}>
+                                                <a class="btn border mx-1" href="?page={{ loop.index }}">{{ loop.index }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if currentPage != nbPage %}
+                                        <li>
+                                            <a class="btn bg-grey mx-1 border" href="?page={{ nbPage }}">Last</a> &nbsp;
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                </nav>
+            </div>
+        </div>   
+    </div>     
+{% endblock %}

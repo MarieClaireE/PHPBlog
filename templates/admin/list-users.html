@@ -1,0 +1,127 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}Liste utilisateurs - PHP Blog{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-admin.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="text-center my-5">
+        <h1 class="fw-bolder">Liste des utilisateurs</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 mt-4">
+            <div class="ms-3 mb-3">
+            {% include "include/horloge.html" %}
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4 mb-3">
+            <div class="row me-3"> 
+                <div class="card py-2">
+                    <table class="table">
+                        <thead>
+                           <th>
+                               Nom
+                           </th>
+                           <th>
+                               Prénom
+                           </th>
+                           <th>
+                               Email
+                           </th>
+                           <th>
+                               Rôle
+                           </th>
+                           <th>
+                               Membre depuis le
+                           </th>
+                           <th>
+                               Dernière connexion
+                           </th>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>
+                                        {{ user.name|capitalize }}
+                                    </td>
+                                    <td>
+                                        {{ user.prenom|capitalize }}
+                                    </td>
+                                    <td>
+                                        {{ user.email }}
+                                    </td>
+                                    <td>
+                                        {% if user.statut == 1 %}
+                                            Utilisateur
+                                        {% else %}
+                                            <i class="fa-solid fa-crown text-warning"></i>
+                                            Administrateur
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {{ user.firstCnx|date('d-m-y') }}
+                                    </td>
+                                    <td>
+                                        {% if  user.lastCnx is not null %}
+                                            {{ user.lastCnx|date('d-m-y') }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                   </table> 
+                   <nav class="row" aria-label="Pagination">
+                        <hr class="my-0">
+                        <div class="col-3 mx-auto">
+                            {% if nbPage  > 1 %}
+                                {% set nearbyPagesLimit = 4 %}
+                                <div>
+                                    <ul class="pagination">
+                                        {% if currentPage != 1 %}
+                                            <li>
+                                                <a class="btn bg-grey mx-1 border" href="?page=1">First</a> 
+                                            </li>
+                                        {% endif %}
+                                        {% for i in 1..nbPage %}
+                                            {% if 0 == (currentPage - nearbyPagesLimit) - loop.index  %}
+                                                <li class="disabled">
+                                                    <a href="#">...</a> 
+                                                </li>
+                                            {% elseif 0 == (currentPage + nearbyPagesLimit) - loop.index  %}
+                                                <li class="disabled">
+                                                    <a href="#">...</a>
+                                                </li>
+                                            {% elseif 0 < (currentPage - nearbyPagesLimit) - loop.index  %}                                      
+                                            {% elseif 0 > (currentPage + nearbyPagesLimit) - loop.index  %}
+                                            {% else %}
+                                                <li 
+                                                {% if currentPage == loop.index %} 
+                                                active{% endif %}>
+                                                    <a class="btn border mx-1" href="?page={{ loop.index }}">{{ loop.index }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if currentPage != nbPage %}
+                                            <li>
+                                                <a class="btn bg-grey mx-1 border" href="?page={{ nbpage }}">Last</a> &nbsp;
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>   
+    </div>     
+{% endblock %}
+
+
+

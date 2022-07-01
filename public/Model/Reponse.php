@@ -4,7 +4,7 @@ namespace App\Model;
 
 class Reponse 
 {
-    protected $id;
+    protected $reponseId;
     protected $contenu;
     protected $addedOn;
     protected $usersId;
@@ -20,15 +20,15 @@ class Reponse
      */
     public function getId()
     {
-        return $this->id;
+        return $this->reponseId;
     }
 
     /**
      * Set the value of id
      */
-    public function setId($id): self
+    public function setId($reponseId): self
     {
-        $this->id = $id;
+        $this->reponseId = $reponseId;
 
         return $this;
     }

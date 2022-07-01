@@ -1,0 +1,117 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}Réponse au commentaire {% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-admin.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="text-center my-5">
+        <h1 class="fw-bolder"> Réponses au commentaire </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row py-4 ms-1 me-1">
+        <div class="col-lg-4">
+            <div class="card border-0 mb-3">
+                <a href="post-Admin.php?postId={{ comment.postId }}">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Retour au post
+                </a>
+            </div>
+            <div class="card mb-3 border-0">
+                {% include "include/horloge.html" %}
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="card mb-3">
+                    <div class="card-header m-0 py-2">
+                        <i class="fa fa-user fa-x2"></i>
+                        {% for user in users %}
+                            {% if comment.usersId == user.id %}
+                                {{ user.name }} {{ user.prenom }}
+                            {% endif %} 
+                        {% endfor %}
+                        <span class="float-end text-muted" style="font-size:10px;">
+                            <i class="fa fa-calendar"></i>
+                            {{ comment.addedOn|date('d-m-y') }}
+                        </span>
+                    </div>
+                    <p class="card-text px-2">
+                        {{ comment.contenu }}
+                    </p>
+                    <div class="card-footer">
+                        {% for reponse in reponses %}
+                            {% if reponse.statut == 1 %}
+                                <div class="card mx-auto mb-2 ms-2">
+                                    <div class="card-header">
+                                        <i class="fa fa-user fa-x2"></i>
+                                        {% for user in users %}
+                                            {% if reponse.usersId == user.id %}
+                                                {{ user.name }} {{ user.prenom }}
+                                            {% endif %} 
+                                        {% endfor %}
+                                        <span class="float-end text-muted" style="font-size:10px;">
+                                            <i class="fa fa-calendar"></i>
+                                            {{ reponse.addedOn|date('d-m-y') }}
+                                        </span>
+                                    </div>
+                                    <p class="card-text px-2">
+                                        {{ reponse.contenu }}
+                                    </p>
+                                </div>   
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <nav class="row" aria-label="Pagination">
+                    <hr class="my-0">
+                    <div class="col-3 mx-auto">
+                        {% if nbPage  > 1 %}
+                            {% set nearbyPagesLimit = 4 %}
+                            <div>
+                                <ul class="pagination">
+                                    {% if currentPage != 1 %}
+                                        <li>
+                                            <a class="btn bg-grey mx-1 border" href="?id={{ comment.id }}&page=1">First</a> 
+                                        </li>
+                                    {% endif %}
+                                    {% for i in 1..nbPage %}
+                                        {% if 0 == (currentPage - nearbyPagesLimit) - loop.index  %}
+                                            <li class="disabled">
+                                                <a href="#">...</a> 
+                                            </li>
+                                        {% elseif 0 == (currentPage + nearbyPagesLimit) - loop.index  %}
+                                            <li class="disabled">
+                                                <a href="#">...</a>
+                                            </li>
+                                        {% elseif 0 < (currentPage - nearbyPagesLimit) - loop.index  %}                                      
+                                        {% elseif 0 > (currentPage + nearbyPagesLimit) - loop.index  %}
+                                        {% else %}
+                                            <li 
+                                            {% if currentPage == loop.index %} 
+                                            active{% endif %}>
+                                                <a class="btn border mx-1" href="?id={{ comment.id }}&page={{ loop.index }}">{{ loop.index }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if currentPage != nbPage %}
+                                        <li>
+                                            <a class="btn bg-grey mx-1 border" href="?id={{ comment.id }}&page={{ nbPage }}">Last</a> &nbsp;
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <hr class="col-10 mx-auto bg-yellow">
+        {% include "formulaire/reponse.html" %}
+    </div>    
+{% endblock %}

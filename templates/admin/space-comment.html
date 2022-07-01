@@ -1,0 +1,30 @@
+{% for comment in commentaires %}
+    {% if comment.statut == 0 %}
+        {% if comment.postId == post.id %}
+            <div class="card px-2 mb-2">
+                <div class="card-title border-bottom px-2 py-1">
+                    {% for user in users %}
+                        {% if comment.usersId == user.id %}
+                            <i class="fa fa-user fa-2x"></i>
+                            {{ user.name|capitalize }} {{ user.prenom|capitalize }}
+                            <span class="float-end text-muted fs-6">
+                                <i class="fa fa-calendar"></i>
+                                {{ comment.addedOn|date('d-m-y')}}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        {{ comment.contenu }}
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a href="commentaireAdmin.php?id={{ comment.id }}">
+                        Voir les réponses du commentaire
+                    </a>
+                </div>
+            </div>   
+        {% endif %}  
+    {% endif %}
+{% endfor %}

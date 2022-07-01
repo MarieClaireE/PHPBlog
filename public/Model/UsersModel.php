@@ -10,22 +10,19 @@ class UsersModel extends Cnx
 {
     public function createUser(Users $user)
     { 
-        if (empty($user->getName()) || empty($user->getPrenom()) || (empty($user->getEmail()) || (empty($user->getPassword())))) {
-            print 'Pour s\'enregistrer il faut remplir tous les champs';
-        } else {
-            $sql = "INSERT INTO users (name, prenom, email, password, statut, firstCnx) values (:nom, :prenom, :email, :password, :statut, :firstCnx)";
+        $sql = "INSERT INTO users (name, prenom, email, password, statut, firstCnx) values (:nom, :prenom, :email, :password, :statut, :firstCnx)";
 
-            $req= Cnx::getInstance()->prepare($sql);
-            
-            $req->bindValue(':nom', $user->getName(), PDO::PARAM_STR);
-            $req->bindValue(':prenom', $user->getPrenom(), PDO::PARAM_STR);
-            $req->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
-            $req->bindValue(':password', $user->getPassword(), PDO::PARAM_STR);
-            $req->bindValue(':firstCnx', $user->getFirstCnx(), PDO::PARAM_STR);
-            $req->bindValue(':statut', $user->getStatut(), PDO::PARAM_STR);
+        $req= Cnx::getInstance()->prepare($sql);
+        
+        $req->bindValue(':nom', $user->getName(), PDO::PARAM_STR);
+        $req->bindValue(':prenom', $user->getPrenom(), PDO::PARAM_STR);
+        $req->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
+        $req->bindValue(':password', $user->getPassword(), PDO::PARAM_STR);
+        $req->bindValue(':firstCnx', $user->getFirstCnx(), PDO::PARAM_STR);
+        $req->bindValue(':statut', $user->getStatut(), PDO::PARAM_STR);
 
-            $req->execute();
-        }  
+        $req->execute();
+        
     }
 
     public function readUser($id)
@@ -77,11 +74,55 @@ class UsersModel extends Cnx
 
     }
 
-    public function cnxUser($email, $password)
-    {   
-        $sql = "SELECT * FROM users WHERE email=:email AND password=:mdp";
+    public function readClassed()
+    {
+        $page_url = filter_input(INPUT_GET, 'page');
+
+        if (!isset($page_url)) {
+            $page = 1;
+        } else {
+            $page = $page_url;
+        }
+        $perPage = 4;
+        $start = ($page-1) * $perPage;
+        
+        $sql = "SELECT * FROM users ORDER BY name ASC LIMIT $start, $perPage";
         $req = Cnx::getInstance()->prepare($sql);
-        $req->execute(array('email' =>filter_input(INPUT_POST, 'email'), 'mdp' => filter_input(INPUT_POST, 'password')));
+        $req->execute();
+
+        while($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            $user = new Users;
+            $user->setId($data['id']);
+            $user->setName($data['name']);
+            $user->setPrenom($data['prenom']);
+            $user->setEmail($data['email']);
+            $user->setPassword($data['password']);
+            $user->setFirstCnx($data['firstCnx']);
+            $user->setLastCnx($data['lastCnx']);
+            $user->setStatut($data['statut']);
+
+            $users[] = $user;
+        }
+       
+        if (!empty($users)) {
+            return $users;
+        }
+    }
+
+    public function cnxUser()
+    {   
+        $sql = "SELECT * FROM users WHERE email=:email";
+        $req = Cnx::getInstance()->prepare($sql);
+        $req->execute(array('email' =>filter_input(INPUT_POST, 'email')));
+
+        return $req;
+    }
+
+    public function cnxAdmin()
+    {
+        $sql = "SELECT * FROM users WHERE email=:email AND statut=:statut";
+        $req = Cnx::getInstance()->prepare($sql);
+        $req->execute(array('email' => filter_input(INPUT_POST, 'email'), 'statut'=> 0));
 
         return $req;
     }
@@ -101,10 +142,10 @@ class UsersModel extends Cnx
         $req->execute(); 
     }
 
-    public function updatelastCnx($lastCnx, $id) {
+    public function updatelastCnx($lastCnx, $userId) {
         $sql = "UPDATE users SET lastCnx = :lastCnx WHERE id=:id";
         $req = Cnx::getInstance()->prepare($sql);
-        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->bindValue(':id', $userId, PDO::PARAM_INT);
         $req->bindValue(':lastCnx', $lastCnx, PDO::PARAM_STR);
 
         $req->execute();

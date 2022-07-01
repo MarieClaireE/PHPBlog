@@ -1,0 +1,144 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}{{post.titre|capitalize}}{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-admin.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="text-center my-5">
+        <h1 class="fw-bolder"> {{ post.titre|capitalize }} </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 py-3">
+            <div class="ms-3 mb-3">
+                <a href="homePage-admin.php">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Retour à l'accueil
+                </a>
+            </div>
+            <div class="ms-3 mb-3">
+            {% include "include/horloge.html" %}
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4">
+            <div class="row me-3">
+                <div class="card mb-4">
+                    <div class="col-12">
+                        <div class="row justify-content-start">
+                            <div class="card-img-left col-6">
+                                <img src="{{ post.image }}" class="w-75" alt="">
+                            </div>
+                            <div class="small text-muted col-6">
+                                Posté par : 
+                                {% for user in users %}
+                                    {% if user.id == post.usersId %}
+                                        {{ user.name }} {{ user.prenom }}
+                                    {% endif %}
+                                {% endfor %}
+                                <span class="float-end">
+                                    <span class="badge bg-secondary">
+                                        {% if post.type == 0 %}
+                                            Web Design
+                                        {% elseif post.type == 1 %}
+                                            HTML
+                                        {% elseif post.type == 2 %}
+                                            JavaScript
+                                        {% elseif post.type == 3 %}
+                                            CSS
+                                        {% elseif post.type == 4 %}
+                                            PHP
+                                        {% endif %}
+                                    </span>
+                                </span>
+                                <br>
+                                <i class="fa-solid fa-calendar"></i>
+                                Le {{ post.addedOn|date('d-m-y') }}
+                                <br>
+                                {% if post.updatedOn != null %}
+                                    <i class="fa-solid fa-calendar"></i>
+                                    Modifié le {{ post.updatedOn|date('d-m-y') }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-muted">
+                                {{ post.chapo }}
+                            </h5>
+                            <p class="card-text">
+                                {{ post.contenu }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        <hr class="bg-yellow col-8 mx-auto">
+        <div class="card col-10 mx-auto mb-3">
+            <h3 class="card-title">
+                Espace commentaire : 
+            </h3>
+            <div class="card-body">
+                {% include "admin/space-comment.html" %}
+            </div>
+        </div>
+        <nav class="row" aria-label="Pagination">
+            <hr class="my-0">
+            <div class="col-3 mx-auto">
+                {% if nbpage  > 1 %}
+                    {% set nearbyPagesLimit = 4 %}
+                    <div>
+                        <ul class="pagination">
+                            {% if currentPage != 1 %}
+                                <li>
+                                    <a class="btn bg-grey mx-1 border" href="?postId={{ post.id }}&page=1">First</a> 
+                                </li>
+                            {% endif %}
+                            {% for i in 1..nbpage %}
+                                {% if 0 == (currentPage - nearbyPagesLimit) - loop.index  %}
+                                    <li class="disabled">
+                                        <a href="#">...</a> 
+                                    </li>
+                                {% elseif 0 == (currentPage + nearbyPagesLimit) - loop.index  %}
+                                    <li class="disabled">
+                                        <a href="#">...</a>
+                                    </li>
+                                {% elseif 0 < (currentPage - nearbyPagesLimit) - loop.index  %}                                      
+                                {% elseif 0 > (currentPage + nearbyPagesLimit) - loop.index  %}
+                                {% else %}
+                                    <li 
+                                    {% if currentPage == loop.index %} 
+                                    active{% endif %}>
+                                        <a class="btn border mx-1" href="?postId={{ post.id }}&page={{ loop.index }}">{{ loop.index }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if currentPage != nbpage %}
+                                <li>
+                                    <a class="btn bg-grey mx-1 border" href="?postId={{ post.id }}&page={{ nbpage }}">Last</a> &nbsp;
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </nav>
+        <div class="col-10 mx-auto mb-3">
+            {% set date = date() %}
+            <form action="" method="post">
+                <textarea name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>
+                <input type="hidden" name="postId" value="{{ post.id }}">
+                <input type="hidden" name="usersId" value="{{ id }}"  class="form-control">
+                <input type="hidden" name="addedOn" value="{{ date|date('Y-m-d') }}"  class="form-control">
+                <input type="hidden" name="statut" value="1">
+                <input type="submit" name="publier" value="Publier" class="btn bg-yellow w-100 mb-2 mt-2">
+            </form>
+            {{ message }}
+        </div>
+    </div>     
+{% endblock %}

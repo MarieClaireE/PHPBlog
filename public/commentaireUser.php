@@ -1,7 +1,7 @@
 <?php
-include 'session.php';
 
 use App\Autoload;
+use App\Core\Cnx;
 use App\Model\CommentaireModel;
 use App\Model\Reponse;
 use App\Model\ReponseModel;
@@ -10,6 +10,7 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 define('ROOT', dirname(__DIR__));
+include 'session.php';
 
 require_once ROOT.'/public/Autoload.php';
 require ROOT.'/vendor/autoload.php';
@@ -27,9 +28,15 @@ $usersModel = new UsersModel;
 $users = $usersModel->readAllUsers();
 
 $modelReponse = new ReponseModel;
-$reponses = $modelReponse->readAllClassed();
+$reponses = $modelReponse->readAllClassed($comment->getId());
 
-$nbPage = 4;
+$count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM reponse");
+$count->setFetchMode(PDO::FETCH_ASSOC);
+$count->execute();
+$tcount = $count->fetchAll();
+
+$perPage = 4;
+$nbPage = ceil($tcount[0]["pid"] / $perPage);
 
 $message = '';
 $repondre_html = filter_input(INPUT_POST, 'repondre');

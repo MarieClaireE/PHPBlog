@@ -12,6 +12,8 @@ class Users
     protected $firstCnx;
     protected $lastCnx;
     protected $statut;
+    protected $password_recovery_asked_date;
+    protected $password_recovery_token;
 
     const ADMIN = 0;
     const USER = 1;
@@ -161,6 +163,42 @@ class Users
     public function setStatut($statut): self
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of password_recovery_asked_date
+     */
+    public function getPasswordRecoveryAskedDate()
+    {
+        return $this->password_recovery_asked_date;
+    }
+
+    /**
+     * Set the value of password_recovery_asked_date
+     */
+    public function setPasswordRecoveryAskedDate($password_recovery_asked_date): self
+    {
+        $this->password_recovery_asked_date = $password_recovery_asked_date;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of password_recovery_token
+     */
+    public function getPasswordRecoveryToken()
+    {
+        return $this->password_recovery_token;
+    }
+
+    /**
+     * Set the value of password_recovery_token
+     */
+    public function setPasswordRecoveryToken($password_recovery_token): self
+    {
+        $this->password_recovery_token = $password_recovery_token;
 
         return $this;
     }

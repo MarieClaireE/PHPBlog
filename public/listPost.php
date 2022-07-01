@@ -17,7 +17,7 @@ $loader = new FilesystemLoader(ROOT.'/templates');
 $twig = new Environment($loader);
 
 $model = new PostsModel;
-$posts = $model->readAllPostClassed();
+$posts = $model->readAllPost();
 
 $count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM post");
 $count->setFetchMode(PDO::FETCH_ASSOC);
@@ -27,9 +27,12 @@ $tcount = $count->fetchAll();
 $perPage = 4;
 $nbPage = ceil($tcount[0]["pid"] / $perPage);
 
+$filterType = filter_input(INPUT_POST, 'filterType');
 
+$filter = $model->filterPost($filterType);
 
 echo $twig->render('internaute/list-posts.html', [
     'nbpage' => $nbPage,
-    'posts' => $posts
+    'posts' => $posts,
+    'filter' => $filter
 ]);

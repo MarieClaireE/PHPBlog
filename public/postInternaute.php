@@ -28,7 +28,7 @@ $userModel = new UsersModel;
 $users = $userModel->readAllUsers();
 
 $commentModel = new CommentaireModel;
-$commentaires = $commentModel->readAllClassed();
+$commentaires = $commentModel->readAllClassedByPost($post->getId());
 
 $count = Cnx::getInstance()->prepare("SELECT count(*) as pid FROM commentaire");
 $count->setFetchMode(PDO::FETCH_ASSOC);

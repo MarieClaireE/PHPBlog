@@ -1,0 +1,153 @@
+{% extends 'BaseTemplate.html.twig' %}
+
+{% block title %}Modifier un post - PHP Blog{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include "include/nav-admin.html" %}   
+{% endblock %}
+{% block header %}
+    <div class="text-center my-5">
+        <h1 class="fw-bolder">Modifier ou supprimer le post</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 mt-4">
+            <div class="ms-3 mb-3">
+                <a href="post-management.php">
+                    <i class="fa-solid fa-arrow-left-long"></i>
+                    Retour
+                </a>
+            </div>
+            <div class="ms-3 mb-3">
+            {% include "include/horloge.html" %}
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4 mb-3">
+            <div class="row me-3"> 
+                <div class="col-12">
+                    <div class="float-end mb-2 me-2">
+                        {% if comments == null %}
+                            <form action="" method="post">
+                                <input type="hidden" value="{{ post.id }}" name="postId">
+                                <input type="submit" name="reset" value="Supprimer" class="btn bg-danger" onclick="return confirm('Supprimer le post \’{{ post.titre }}\' ?');">   
+                            </form>
+                        {% endif %}
+                    </div>
+                    <form action="" method="post">
+                        <div class="input-group px-2 mt-2">
+                            <input type="text" name="titre" value="{{ post.titre }}" class="form-control">
+                        </div>
+                        <div class="input-group px-2 mt-2">
+                            <input type="text" name="image" value="{{ post.image }}" class="form-control">
+                        </div>
+                        <div class="input-group px-2 mt-2">
+                            <textarea name="chapo" id="chapo" cols="30" rows="5" class="form-control">{{ post.chapo }}</textarea>
+                        </div>
+                        <div class="input-group px-2 mt-2">
+                            <textarea name="contenu" id="contenu" cols="30" rows="5" class="form-control"> {{ post.contenu }}</textarea>
+                        </div>
+                        <input type="hidden" value="{{ post.updatedOn|date('Y-m-d') }}" name="updatedOn">
+                        <p class="font-weigth-bold px-2 mt-2">
+                            {% if post.type == 0 %}
+                                Web Design
+                            {% elseif post.type == 1 %}
+                                HTML
+                            {% elseif post.type == 2 %}
+                                JavaScript
+                            {% elseif post.type == 3 %}
+                                CSS
+                            {% elseif post.type == 4 %}
+                                PHP
+                            {% endif %}
+                        </p>
+                        <div class="input-group px-2 mt-2">
+                            <select name="type" id="type" class="form-control">
+                               <option value="0">Web design</option>
+                               <option value="1">HTLM</option>
+                               <option value="2">JavaScript</option>
+                               <option value="3">CSS</option>
+                               <option value="4">PHP</option>
+                            </select>
+                        </div>
+                        <input type="hidden" value="">
+                        <div class="input-group px-2 mt-2">
+                            <input type="submit" value="Modifier" name="update" class="text-center btn bg-yellow w-100">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>   
+    </div>  
+    {% if null != comments %}
+        <div class="col-12 ms-2 me-2 px-4 bg-white">
+            Liste des commentaires : 
+            <ul>
+                {% for comment in comments %}
+                    {% if comment.postId == post.id %}
+                    <li>
+                        <span class="badge bg-yellow mb-1">
+                            {% if comment.statut == 0 %} Publié {% endif %}
+                            {% if comment.statut == 1 %} En attente{% endif %}
+                        </span>
+                        {% for user in users %}
+                            {% if user.id == comment.usersId %}
+                                {{ user.name }} {{ user.prenom }}
+                            {% endif %}
+                        {% endfor %}
+                        ({{ comment.addedOn|date('d-m-y')}}): {{ comment.contenu }} 
+                        <a href="list-reponses.php?commentId={{ comment.id }}">Voir les réponses liés</a>
+                    </li>  
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <nav class="row" aria-label="Pagination">
+                <hr class="my-0">
+                <div class="col-3 mx-auto">
+                    {% if nbPage  > 1 %}
+                        {% set nearbyPagesLimit = 4 %}
+                        <div>
+                            <ul class="pagination">
+                                {% if currentPage != 1 %}
+                                    <li>
+                                        <a class="btn bg-grey mx-1 border" href="?postId={{ post.id }}&page=1">First</a> 
+                                    </li>
+                                {% endif %}
+                                {% for i in 1..nbPage %}
+                                    {% if 0 == (currentPage - nearbyPagesLimit) - loop.index  %}
+                                        <li class="disabled">
+                                            <a href="#">...</a> 
+                                        </li>
+                                    {% elseif 0 == (currentPage + nearbyPagesLimit) - loop.index  %}
+                                        <li class="disabled">
+                                            <a href="#">...</a>
+                                        </li>
+                                    {% elseif 0 < (currentPage - nearbyPagesLimit) - loop.index  %}                                      
+                                    {% elseif 0 > (currentPage + nearbyPagesLimit) - loop.index  %}
+                                    {% else %}
+                                        <li 
+                                        {% if currentPage == loop.index %} 
+                                        active{% endif %}>
+                                            <a class="btn border mx-1" href="?postId={{ post.id }}&page={{ loop.index }}">{{ loop.index }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if currentPage != nbPage %}
+                                    <li>
+                                        <a class="btn bg-grey mx-1 border" href="?postId={{ post.id }}&page={{ nbPage }}">Last</a> &nbsp;
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>   
+    {% endif %}
+{% endblock %}
+
+
+

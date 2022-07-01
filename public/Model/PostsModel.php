@@ -21,13 +21,7 @@ class PostsModel extends Cnx
         $req->bindValue(':usersId', $post->getUsersId(), PDO::PARAM_INT);
         $req->bindValue(':type', $post->getType(), PDO::PARAM_INT);
 
-        $verif = $req->execute();
-
-        if ($verif) {
-            print "Post enregistré !";
-        } else {
-            print "Une erreur est survenue, veuillez recommencer !";
-        }
+        $req->execute();
     }
    
     public function readPost(int $id) {
@@ -62,10 +56,10 @@ class PostsModel extends Cnx
         } else {
             $page = $page_url;
         }
+        
         $perPage = 4;
         $start = ($page-1) * $perPage;
-        
-        $sql = "SELECT * FROM post ORDER BY addedOn ASC LIMIT $start, $perPage";
+        $sql = "SELECT * FROM post ORDER BY addedOn DESC LIMIT $start, $perPage";
         $req = Cnx::getInstance()->prepare($sql);
         $req->execute();
 
@@ -117,6 +111,32 @@ class PostsModel extends Cnx
         
     }
 
+    public function filterPost($filter) {
+        $sql = "SELECT * FROM post WHERE type=:type";
+        $req = Cnx::getInstance()->prepare($sql);
+
+        $req->bindValue(':type', $filter, PDO::PARAM_INT);
+
+        while($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            $post = new Posts();
+            $post->setId($data['id']);
+            $post->setTitre($data['titre']);
+            $post->setChapo($data['chapo']);
+            $post->setImage($data['image']);
+            $post->setContenu($data['contenu']);
+            $post->setAddedOn($data['addedOn']);
+            $post->setUpdatedOn($data['updatedOn']);
+            $post->setUsersId($data['usersId']);
+            $post->setType($data['type']);
+
+            $posts[] = $post;
+        }
+
+        if (!empty($posts)) {
+            return $posts;
+        }
+
+    }
     public function update(Posts $post) {
         $sql = "UPDATE post SET titre=:titre, chapo=:chapo, image=:image, contenu=:contenu, type=:type, updatedOn=:updatedOn where id=:id";
         $req = Cnx::getInstance()->prepare($sql);
@@ -129,25 +149,52 @@ class PostsModel extends Cnx
         $req->bindValue(':type', $post->getType(), PDO::PARAM_INT);
         $req->bindValue(':updatedOn', $post->getUpdatedOn(), PDO::PARAM_STR);
 
-        $verif = $req->execute();
-
-        if ($verif) {
-            print 'Post modifié!';
-        } else {
-            print 'Une erreur est survenue, veuillez recommencer!';
-        }
+        $req->execute();
     }
 
-    public function deletePost(int $id) {
+    public function deletePost(int $postId) {
         $sql = "DELETE FROM post WHERE id=:id";
         $req = Cnx::getInstance()->prepare($sql);
-        $req->bindValue(':id', $id, PDO::PARAM_INT);
-        $verif = $req->execute();
+        $req->bindValue(':id', $postId, PDO::PARAM_INT);
+        $req->execute();
+    }
 
-        if ($verif) {
-            print 'Suppression réussie !!!';
-        } else {
-            print 'Une erreur est survenue, veuillez recommencer !! ';
+    public function searchBy(int $type)
+    {
+        $page_url = filter_input(INPUT_GET, 'page');
+
+        if (!isset($page_url)) {
+            $page = 1;
+            return;
+        } 
+         $page = $page_url;
+        
+        $perPage = 4;
+        $start = ($page-1) * $perPage;
+
+        $sql = "SELECT * FROM post WHERE type=:type ORDER BY addedOn DESC LIMIT $start, $perPage";
+        $req = Cnx::getInstance()->prepare($sql);
+        $req->bindValue('type', $type, PDO::PARAM_INT);
+        $req->execute();
+        
+
+        while($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            $post = new Posts();
+            $post->setId($data['id']);
+            $post->setTitre($data['titre']);
+            $post->setChapo($data['chapo']);
+            $post->setImage($data['image']);
+            $post->setContenu($data['contenu']);
+            $post->setAddedOn($data['addedOn']);
+            $post->setUpdatedOn($data['updatedOn']);
+            $post->setUsersId($data['usersId']);
+            $post->setType($data['type']);
+
+            $posts[] = $post;
         }
+        
+        if (!empty($posts)) {
+            return $posts;
+        }  
     }
 }

@@ -1,0 +1,23 @@
+{% set date = date('-2H') %}
+
+    <form action="" method="post">
+        <div class="input-group">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input type="email" name="email" placeholder="Votre E-mail" class="form-control" aria-describedby="basic-addon1" required>
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-text" id="basic-addon2">
+                <i class="fa-solid fa-key"></i>
+            </span>
+            <input type="password" name="password" placeholder="Votre mot de passe" class="form-control" aria-describedby="basic-addon2" required >
+        </div>
+        <br>
+        <input type="hidden" value="{{ date|date('Y-m-d') }}" name="lastCnx">
+        <br>
+        <input type="submit" class="btn btn-info" value="Se connecter" name="connexion">
+        <a href="forgot_password.php" class="float-end">Mot de passe oublié ? </a>
+    </form>
+    <span>
+        {{ error }}
+    </span>

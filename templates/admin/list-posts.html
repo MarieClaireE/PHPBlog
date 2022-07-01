@@ -1,0 +1,38 @@
+{% for post in posts %}
+    <div class="col-lg-6">
+        <div class="card mb-4">
+            <a href="#!">
+                <img class="card-img-top" src="{{ post.image }}" alt="">
+            </a>
+            <div class="card-body">
+                <div class="small text-muted">
+                    Publié le {{ post.addedOn|date('d-m-y') }}
+                    <br>
+                    {% if null != post.updatedOn %}
+                       Mis à jour le {{ post.updatedOn|date('d-m-y')}} 
+                    {% endif %}
+                </div>
+                <h4 class="card-title">{{ post.titre }}</h4>
+                <h6 class="text-muted fs-6">
+                    {{ post.chapo }}
+                </h6>
+                <p class="card-text">
+                    <span class="badge bg-secondary">
+                        {% if post.type == 0 %}
+                            Web Design
+                        {% elseif post.type == 1 %}
+                            HTML
+                        {% elseif post.type == 2 %}
+                            JavaScript
+                        {% elseif post.type == 3 %}
+                            CSS
+                        {% elseif post.type == 4 %}
+                            PHP
+                        {% endif %}
+                    </span> 
+                </p>
+                <a href="post-Admin.php?postId={{ post.id }}" class="btn btn-url bg-yellow w-100"> Lire l'article →</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
