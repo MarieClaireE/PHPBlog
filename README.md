@@ -5,6 +5,7 @@ BLOG PHP
 Projet OpenClassroom : Création d'un blog
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/619385f83f6b4d348035e640d5e1e872)](https://www.codacy.com/gh/MarieClaireE/PHPBlog/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MarieClaireE/PHPBlog&amp;utm_campaign=Badge_Grade)
+
 **Installation de la base de données**:
 - Récupérer le fichier blog.sql dans le dossier sql;
 - Créer la base de données `PHPBlog` dans votre serveur; 
