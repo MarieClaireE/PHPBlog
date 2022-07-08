@@ -1,4 +1,7 @@
 # PHPBlog
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e317bc2492924d81a9b0a305f113c312)](https://app.codacy.com/gh/MarieClaireE/PHPBlog?utm_source=github.com&utm_medium=referral&utm_content=MarieClaireE/PHPBlog&utm_campaign=Badge_Grade_Settings)
+
 BLOG PHP
 
 Projet OpenClassroom : Création d'un blog
