@@ -11,10 +11,11 @@ class Cnx extends PDO
     private static $instance;
 
     // information de cnx à la bdd
-    private const DBHOST = '';
-    private const DBUSER = '';
-    private const DBPASS = '';
-    private const DBNAME = 'PHPBlog';
+
+    private const DBHOST = 'localhost'; // server name
+    private const DBUSER = 'root'; // user name
+    private const DBPASS = 'password'; // user password
+    private const DBNAME = 'PHPBlog'; // database Name
 
     public function __construct()
     {

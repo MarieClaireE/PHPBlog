@@ -7,7 +7,10 @@ Projet OpenClassroom : Création d'un blog
 - Récupérer le fichier blog.sql dans le dossier sql;
 - Créer la base de données `PHPBlog` dans votre serveur; 
 - Modifier les informations dans le fichier Public/Core/Cnx.php;
+![alt text](Capture d’écran 2022-07-08 à 08.56.30.png);
+
 - Importer les données du fichier blog.sql dans votre base de données;
+
 
 **Installation du projet** :
  - Dans un premier temps rendez-vous sur le repository PHPBlog et faites : `Télécharger ZIP` : ça va télécharger le dossier sur votre ordinateur en format zip.
