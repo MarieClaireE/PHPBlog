@@ -19,10 +19,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `dbs6095536`
+-- Base de données : `PHPBlog`
 --
-CREATE DATABASE IF NOT EXISTS `dbs6095536` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `dbs6095536`;
+CREATE DATABASE IF NOT EXISTS `PHPBlog` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `PHPBlog`;
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,7 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `titre`, `chapo`, `image`, `contenu`, `usersId`, `addedOn`, `updateOn`, `type`) VALUES
-(1, 'Forum PHP 2022 les 13 et 14 octobre à Paris ', 'Le cycle de conférences de l\'AFUP prépare la 21e édition de Forum PHP 2022. Cette année l\'évènement fera sont grand retour en présentiel et présente une affiche toujours aussi ambitieuse. Voici les dernière actualité.', 'https://www.toolinux.com/IMG/jpg/capture_d_ecran_2022-06-03_a_09.02.52.jpg?1654240371', 'L\'association française des utilisateurs de PHP organise chaque année le Forum PHP. Et cette année est déjà la 21e édition. Elle entend promouvoir le langage PHP et participer à son développement.\r\nDeux jours d\'apprentissages et d\'échanges dans un lieu peu ordinaire : l\'Hôtel New York du parc DisneyLand Paris.\r\n\r\nLe programme n\'est pas encore défini à ce stade mais l\'appel à conférences (https://afup.org/event/forumphp2022)  est lancé. L\'occasion de vous manifester si vous avez envie de parler de serverless, de qualité et de travail en équipe. Ou encore de raconter ce que l\'open-source a apporté à votre dernier projet ou comment cet outil a révolutionné votre façon d\'appréhender votre développement.\r\n\r\nAutres nouveauté de cette année : l\'accueil des personnes sourdes ou malentendantes  grâce à un prestataire \"Le Messager\", les organisateurs nous expliquent : \" toutes les conférences sont sous-titrées en temps réel, à la vitesse de la parole, dans un langage de qualité, avec une ponctuation adaptée. Les sous-titres sont diffusées sur l\'écran géant de chaque amphithéâtre pour être lisibles de toutes et de tous et depuis n\'importe quel siège de la salle\".\r\n\r\nLa billetterie est ouverte.\r\nLe tarif \"Early Bird\" est épuisé, mais vous pouvez, si vous êtes membres de l\'AFUP, acheter des entrées a 190 € pour les 2 jours.\r\nL\'adhésion revient à 30€ par an.\r\n\r\nBilletterie :  https://afup.org/event/forumphp2022/tickets\r\nAdhésion : https://afup.org/association/devenir-membre\r\n\r\nSources : \r\n- https://www.toolinux.com/?forum-php-2022-paris\r\n- Le site du Forum PHP 2022 : https://event.afup.org/\r\n- L\'appel à conférences : https://afup.org/event/forumphp2022\r\n- Réseaux sociaux : \r\nTwitter : @afup\r\nMastodon : @afup@mastodon.online\r\n', 4, '2022-06-03', NULL, 4);
+(1, "Forum PHP 2022 les 13 et 14 octobre à Paris ', 'Le cycle de conférences de l'AFUP prépare la 21e édition de Forum PHP 2022. Cette année l'évènement fera sont grand retour en présentiel et présente une affiche toujours aussi ambitieuse. Voici les dernière actualité.", "https://www.toolinux.com/IMG/jpg/capture_d_ecran_2022-06-03_a_09.02.52.jpg?1654240371", "L'association française des utilisateurs de PHP organise chaque année le Forum PHP. Et cette année est déjà la 21e édition. Elle entend promouvoir le langage PHP et participer à son développement.\r\nDeux jours d'apprentissages et d'échanges dans un lieu peu ordinaire : l'Hôtel New York du parc DisneyLand Paris. r\n\r\nLe programme n'est pas encore défini à ce stade mais l'appel à conférences (https://afup.org/event/forumphp2022)  est lancé. L'occasion de vous manifester si vous avez envie de parler de serverless, de qualité et de travail en équipe. Ou encore de raconter ce que l 'open-source a apporté à votre dernier projet ou comment cet outil a révolutionné votre façon d 'appréhender votre développement.\r\n\r\nAutres nouveauté de cette année : l'accueil des personnes sourdes ou malentendantes  grâce à un prestataire 'Le Messager', les organisateurs nous expliquent : 'toutes les conférences sont sous-titrées en temps réel, à la vitesse de la parole, dans un langage de qualité, avec une ponctuation adaptée. Les sous-titres sont diffusées sur l'écran géant de chaque amphithéâtre pour être lisibles de toutes et de tous et depuis n'importe quel siège de la salle'.\r\n\r\nLa billetterie est ouverte.\r\nLe tarif 'Early Bird' est épuisé, mais vous pouvez, si vous êtes membres de l'AFUP, acheter des entrées a 190 € pour les 2 jours.\r\nL\'adhésion revient à 30€ par an.\r\n\r\nBilletterie :  https://afup.org/event/forumphp2022/tickets\r\nAdhésion : https://afup.org/association/devenir-membre\r\n\r\nSources : \r\n- https://www.toolinux.com/?forum-php-2022-paris\r\n- Le site du Forum PHP 2022 : https://event.afup.org/\r\n- L'appel à conférences : https://afup.org/event/forumphp2022\r\n- Réseaux sociaux : \r\nTwitter : @afup\r\nMastodon : @afup@mastodon.online\r\n", 4, '2022-06-03', NULL, 4);
 
 -- --------------------------------------------------------
 
@@ -103,7 +103,7 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(100) NOT NULL,
   `firstCnx` date NOT NULL,
-  `lastCnx` date NOT NULL,
+  `lastCnx` date DEFAULT NULL,
   `statut` tinyint(1) NOT NULL,
   `password_recovery_asked_date` date DEFAULT NULL,
   `password_recovery_token` varchar(20) DEFAULT NULL
