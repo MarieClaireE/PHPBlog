@@ -7,12 +7,11 @@ Projet OpenClassroom : Création d'un blog
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/619385f83f6b4d348035e640d5e1e872)](https://www.codacy.com/gh/MarieClaireE/PHPBlog/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MarieClaireE/PHPBlog&amp;utm_campaign=Badge_Grade)
 
 **Installation de la base de données**:
-- Récupérer le fichier blog.sql dans le dossier sql;
+- Récupérer le fichier dbs6095536.sql dans le dossier sql;
 - Créer la base de données `PHPBlog` dans votre serveur; 
 - Modifier les informations dans le fichier Public/Core/Cnx.php;
-![alt text](Capture d’écran 2022-07-08 à 08.56.30.png);
 
-- Importer les données du fichier blog.sql dans votre base de données;
+- Importer les données du fichier dbs6095536.sql dans votre base de données;
 
 
 **Installation du projet** :
