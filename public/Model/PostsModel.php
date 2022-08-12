@@ -71,7 +71,7 @@ class PostsModel extends Cnx
             $post->setImage($data['image']);
             $post->setContenu($data['contenu']);
             $post->setAddedOn($data['addedOn']);
-            $post->setUpdatedOn($data['updatedOn']);
+            $post->setUpdatedOn($data['updateOn']);
             $post->setUsersId($data['usersId']);
             $post->setType($data['type']);
 
@@ -125,7 +125,7 @@ class PostsModel extends Cnx
             $post->setImage($data['image']);
             $post->setContenu($data['contenu']);
             $post->setAddedOn($data['addedOn']);
-            $post->setUpdatedOn($data['updatedOn']);
+            $post->setUpdatedOn($data['updateOn']);
             $post->setUsersId($data['usersId']);
             $post->setType($data['type']);
 

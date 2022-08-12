@@ -10,7 +10,7 @@ class Posts
     protected $image;
     protected $contenu;
     protected $addedOn;
-    protected $updatedOn;
+    protected $updateOn;
     protected $usersId;
     protected $type;
 
@@ -129,19 +129,19 @@ class Posts
     }
 
     /* 
-    * get value of updatedOn
+    * get value of updateOn
     */
     public function getUpdatedOn()
     {
         return $this->updatedOn;
     }
     /* 
-    * set value of updatedOn
+    * set value of updateOn
     * @return self 
     */
-    public function setUpdatedOn($updatedOn)
+    public function setUpdatedOn($updateOn)
     {
-        $this->updatedOn=$updatedOn;
+        $this->updateOn=$updateOn;
         return $this;
     }
 
