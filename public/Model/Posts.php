@@ -133,7 +133,7 @@ class Posts
     */
     public function getUpdatedOn()
     {
-        return $this->updatedOn;
+        return $this->updateOn;
     }
     /* 
     * set value of updateOn
