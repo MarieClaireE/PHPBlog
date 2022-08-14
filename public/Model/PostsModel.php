@@ -41,7 +41,7 @@ class PostsModel extends Cnx
         $post->setContenu($data['contenu']);
         $post->setImage($data['image']);
         $post->setAddedOn($data['addedOn']);
-        $post->setUpdatedOn($data['updatedOn']);
+        $post->setUpdatedOn($data['updateOn']);
         $post->setUsersId($data['usersId']);
         $post->setType($data['type']);
 
@@ -98,7 +98,7 @@ class PostsModel extends Cnx
             $post->setImage($data['image']);
             $post->setContenu($data['contenu']);
             $post->setAddedOn($data['addedOn']);
-            $post->setUpdatedOn($data['updatedOn']);
+            $post->setUpdatedOn($data['updateOn']);
             $post->setUsersId($data['usersId']);
             $post->setType($data['type']);
 
@@ -125,7 +125,7 @@ class PostsModel extends Cnx
             $post->setImage($data['image']);
             $post->setContenu($data['contenu']);
             $post->setAddedOn($data['addedOn']);
-            $post->setUpdatedOn($data['updateOn']);
+            $post->setupdatedOn($data['updateOn']);
             $post->setUsersId($data['usersId']);
             $post->setType($data['type']);
 
@@ -138,7 +138,7 @@ class PostsModel extends Cnx
 
     }
     public function update(Posts $post) {
-        $sql = "UPDATE post SET titre=:titre, chapo=:chapo, image=:image, contenu=:contenu, type=:type, updatedOn=:updatedOn where id=:id";
+        $sql = "UPDATE post SET titre=:titre, chapo=:chapo, image=:image, contenu=:contenu, type=:type, updateOn=:updateOn where id=:id";
         $req = Cnx::getInstance()->prepare($sql);
 
         $req->bindValue(':id', $post->getId(), PDO::PARAM_INT);
@@ -147,7 +147,7 @@ class PostsModel extends Cnx
         $req->bindValue(':image', $post->getImage(), PDO::PARAM_STR);
         $req->bindValue(':contenu', $post->getContenu(), PDO::PARAM_STR);
         $req->bindValue(':type', $post->getType(), PDO::PARAM_INT);
-        $req->bindValue(':updatedOn', $post->getUpdatedOn(), PDO::PARAM_STR);
+        $req->bindValue(':updateOn', $post->getUpdatedOn(), PDO::PARAM_STR);
 
         $req->execute();
     }
@@ -186,7 +186,7 @@ class PostsModel extends Cnx
             $post->setImage($data['image']);
             $post->setContenu($data['contenu']);
             $post->setAddedOn($data['addedOn']);
-            $post->setUpdatedOn($data['updatedOn']);
+            $post->setUpdatedOn($data['updateOn']);
             $post->setUsersId($data['usersId']);
             $post->setType($data['type']);
 
