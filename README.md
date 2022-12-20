@@ -25,4 +25,4 @@ Projet OpenClassroom : Création d'un blog
 Le projet est maintenant prêt ! 
 
 **Pour lancer le projet en local** : 
-- tapez dans le terminal : `cd public/` et `php -S localhost:8000`
+- tapez dans le terminal : `cd public/` et `php -S localhost:8000` 
